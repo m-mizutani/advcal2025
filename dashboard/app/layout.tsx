@@ -15,6 +15,19 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "advcal2025",
   description: "セキュリティ分析LLMエージェント実装 - 2025年アドベントカレンダー",
+  openGraph: {
+    title: "advcal2025",
+    description: "セキュリティ分析LLMエージェント実装 - 2025年アドベントカレンダー",
+    url: "https://m-mizutani.github.io/advcal2025/",
+    siteName: "advcal2025",
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "advcal2025",
+    description: "セキュリティ分析LLMエージェント実装 - 2025年アドベントカレンダー",
+  },
 };
 
 export default function RootLayout({
