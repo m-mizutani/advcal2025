@@ -35,6 +35,14 @@ jobs:
         run: npm ci
         working-directory: ./dashboard
 
+      - name: Install Playwright browsers
+        run: npx playwright install chromium
+        working-directory: ./dashboard
+
+      - name: Generate OGP image
+        run: node scripts/generate-ogp.mjs
+        working-directory: ./dashboard
+
       - name: Build with Next.js
         run: npm run build
         working-directory: ./dashboard

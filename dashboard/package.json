@@ -15,11 +15,13 @@
     "recharts": "^3.2.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.56.0",
     "@tailwindcss/postcss": "^4",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "playwright": "^1.56.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

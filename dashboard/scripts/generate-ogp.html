@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, height=630">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans JP', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background decoration */
+        .bg-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .circle1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            right: -50px;
+        }
+
+        .circle2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            left: 100px;
+        }
+
+        .circle3 {
+            width: 150px;
+            height: 150px;
+            top: 200px;
+            left: -50px;
+        }
+
+        /* Main content */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 80px 100px;
+            max-width: 1000px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 32px;
+            color: #4a5568;
+            font-weight: 500;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+
+        .meta {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 40px;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .meta-label {
+            font-size: 18px;
+            color: #718096;
+            margin-bottom: 8px;
+        }
+
+        .meta-value {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-decoration">
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+        <div class="circle circle3"></div>
+    </div>
+
+    <div class="container">
+        <div class="badge">2025 Advent Calendar</div>
+        <h1>セキュリティ分析<br>LLMエージェント実装</h1>
+        <div class="subtitle">
+            25日間でLLMを使った<br>セキュリティ分析エージェントを構築
+        </div>
+        <div class="meta">
+            <div class="meta-item">
+                <div class="meta-label">完了</div>
+                <div class="meta-value completed">0</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">公開済み</div>
+                <div class="meta-value published">0</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">達成率</div>
+                <div class="meta-value rate">0%</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
