@@ -27,6 +27,10 @@ async function generateOGP() {
   const htmlPath = join(__dirname, 'generate-ogp.html');
   await page.goto(`file://${htmlPath}`);
 
+  // Wait for fonts to load
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+
   // Inject dynamic data
   await page.evaluate((data) => {
     document.querySelector('.meta-value.completed').textContent = data.completedArticles;
@@ -34,8 +38,8 @@ async function generateOGP() {
     document.querySelector('.meta-value.rate').textContent = data.completionRate + '%';
   }, { completedArticles, publishedArticles, completionRate });
 
-  // Wait for fonts to load
-  await page.waitForTimeout(1000);
+  // Wait a bit more for rendering
+  await page.waitForTimeout(500);
 
   const outputPath = join(__dirname, '..', 'public', 'ogp.png');
   await page.screenshot({
