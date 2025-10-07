@@ -23,10 +23,9 @@ const statusColors: Record<Article['status'], string> = {
 };
 
 export default function ArticleTable({ articles }: ArticleTableProps) {
-  // VSCode URIを生成する関数
-  const getVSCodeUri = (slug: string) => {
-    const articlePath = `/Users/mizutani/.ghq/github.com/m-mizutani/zenn.dev/articles/${slug}.md`;
-    return `vscode://file${articlePath}`;
+  // GitHub URLを生成する関数
+  const getGitHubUrl = (slug: string) => {
+    return `https://github.com/m-mizutani/advcal2025/blob/main/articles/${slug}.md`;
   };
 
   return (
@@ -74,9 +73,11 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
                 </td>
                 <td className="px-6 py-4 text-sm">
                   <a
-                    href={getVSCodeUri(article.slug)}
+                    href={getGitHubUrl(article.slug)}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 hover:underline flex items-center gap-2"
-                    title="VSCodeで開く"
+                    title="GitHubで開く"
                   >
                     <span>{article.title}</span>
                     <svg
