@@ -9,17 +9,13 @@ interface ArticleTableProps {
 const statusLabels: Record<Article['status'], string> = {
   not_started: '未着手',
   in_progress: '執筆中',
-  review: 'レビュー中',
   completed: '完了',
-  published: '公開済み',
 };
 
 const statusColors: Record<Article['status'], string> = {
   not_started: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
   in_progress: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-  review: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
   completed: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-  published: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
 };
 
 export default function ArticleTable({ articles }: ArticleTableProps) {
@@ -49,9 +45,6 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
                 執筆締切
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                公開締切
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                 投稿予定
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -62,6 +55,9 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                 状態
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                備考
               </th>
             </tr>
           </thead>
@@ -99,9 +95,6 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
                   {article.writing_deadline}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                  {article.publication_deadline}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                   {article.scheduled_date} {article.scheduled_time}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
@@ -126,6 +119,9 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
                   >
                     {statusLabels[article.status]}
                   </span>
+                </td>
+                <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                  {article.notes || '-'}
                 </td>
               </tr>
             ))}

@@ -6,7 +6,7 @@ export interface Article {
   scheduled_time: string;
   writing_deadline: string;
   publication_deadline: string;
-  status: 'not_started' | 'in_progress' | 'review' | 'completed' | 'published';
+  status: 'not_started' | 'in_progress' | 'completed';
   progress: number;
   completed_date: string | null;
   notes: string;

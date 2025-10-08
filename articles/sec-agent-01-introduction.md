@@ -1,5 +1,5 @@
 ---
-title: "LLMエージェントによるセキュリティ運用の未来"
+title: "はじめに：LLMエージェントを利用した"
 emoji: "🤖"
 type: "tech"
 topics: ["security", "LLM", "AI", "agent"]

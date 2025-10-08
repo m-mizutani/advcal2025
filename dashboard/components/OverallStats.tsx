@@ -8,10 +8,7 @@ interface OverallStatsProps {
 
 export default function OverallStats({ articles }: OverallStatsProps) {
   const totalArticles = articles.length;
-  const completedArticles = articles.filter(
-    (a) => a.status === 'completed' || a.status === 'published'
-  ).length;
-  const publishedArticles = articles.filter((a) => a.status === 'published').length;
+  const completedArticles = articles.filter((a) => a.status === 'completed').length;
   const inProgressArticles = articles.filter((a) => a.status === 'in_progress').length;
 
   const averageProgress =
@@ -19,7 +16,7 @@ export default function OverallStats({ articles }: OverallStatsProps) {
 
   const today = new Date().toISOString().split('T')[0];
   const overdueArticles = articles.filter(
-    (a) => a.writing_deadline < today && a.status !== 'completed' && a.status !== 'published'
+    (a) => a.writing_deadline < today && a.status !== 'completed'
   ).length;
 
   const stats = [
@@ -30,22 +27,16 @@ export default function OverallStats({ articles }: OverallStatsProps) {
       textColor: 'text-blue-600 dark:text-blue-400',
     },
     {
-      label: '公開済み',
-      value: String(publishedArticles),
-      color: 'bg-purple-500',
-      textColor: 'text-purple-600 dark:text-purple-400',
+      label: '執筆中',
+      value: String(inProgressArticles),
+      color: 'bg-yellow-500',
+      textColor: 'text-yellow-600 dark:text-yellow-400',
     },
     {
       label: '完了',
       value: String(completedArticles),
       color: 'bg-green-500',
       textColor: 'text-green-600 dark:text-green-400',
-    },
-    {
-      label: '執筆中',
-      value: String(inProgressArticles),
-      color: 'bg-yellow-500',
-      textColor: 'text-yellow-600 dark:text-yellow-400',
     },
     {
       label: '平均進捗率',

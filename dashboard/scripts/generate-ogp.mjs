@@ -15,8 +15,8 @@ async function generateOGP() {
 
   // Calculate statistics
   const totalArticles = statusData.articles.length;
-  const completedArticles = statusData.articles.filter(a => a.status === 'completed' || a.status === 'published').length;
-  const publishedArticles = statusData.articles.filter(a => a.status === 'published').length;
+  const completedArticles = statusData.articles.filter(a => a.status === 'completed').length;
+  const inProgressArticles = statusData.articles.filter(a => a.status === 'in_progress').length;
   const completionRate = Math.round((completedArticles / totalArticles) * 100);
 
   const browser = await chromium.launch();
@@ -34,9 +34,9 @@ async function generateOGP() {
   // Inject dynamic data
   await page.evaluate((data) => {
     document.querySelector('.meta-value.completed').textContent = data.completedArticles;
-    document.querySelector('.meta-value.published').textContent = data.publishedArticles;
+    document.querySelector('.meta-value.in-progress').textContent = data.inProgressArticles;
     document.querySelector('.meta-value.rate').textContent = data.completionRate + '%';
-  }, { completedArticles, publishedArticles, completionRate });
+  }, { completedArticles, inProgressArticles, completionRate });
 
   // Wait a bit more for rendering
   await page.waitForTimeout(500);
@@ -48,7 +48,7 @@ async function generateOGP() {
   });
 
   console.log(`OGP image generated: ${outputPath}`);
-  console.log(`Stats - Completed: ${completedArticles}/${totalArticles}, Published: ${publishedArticles}, Rate: ${completionRate}%`);
+  console.log(`Stats - Completed: ${completedArticles}/${totalArticles}, In Progress: ${inProgressArticles}, Rate: ${completionRate}%`);
   await browser.close();
 }
 
