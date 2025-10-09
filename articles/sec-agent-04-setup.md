@@ -1,6 +1,6 @@
 ---
 title: "開発環境とベースコード理解"
-emoji: "🤖"
+emoji: "⚙️"
 type: "tech"
 topics: ["Go", "security", "development", "CLI"]
 published: false

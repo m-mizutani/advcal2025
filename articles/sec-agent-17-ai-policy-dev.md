@@ -1,6 +1,6 @@
 ---
 title: "AI支援によるポリシー開発"
-emoji: "🤖"
+emoji: "🤝"
 type: "tech"
 topics: ["AI", "policy", "testing", "CICD"]
 published: false

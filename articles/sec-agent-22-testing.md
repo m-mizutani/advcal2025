@@ -1,6 +1,6 @@
 ---
 title: "ツールの信頼性を高めるテスト戦略"
-emoji: "🤖"
+emoji: "🧪"
 type: "tech"
 topics: ["testing", "Go", "mock", "CICD"]
 published: false

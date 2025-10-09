@@ -1,6 +1,6 @@
 ---
 title: "大量データの圧縮技術"
-emoji: "🤖"
+emoji: "🗜️"
 type: "tech"
 topics: ["LLM", "data", "compression", "optimization"]
 published: false

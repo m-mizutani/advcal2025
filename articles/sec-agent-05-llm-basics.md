@@ -1,6 +1,6 @@
 ---
 title: "LLM統合の第一歩 - アラート要約"
-emoji: "🤖"
+emoji: "🚀"
 type: "tech"
 topics: ["LLM", "OpenAI", "Gemini", "API"]
 published: false

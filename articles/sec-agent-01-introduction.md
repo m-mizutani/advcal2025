@@ -1,6 +1,6 @@
 ---
-title: "はじめに：生成AIエージェントを利用した"
-emoji: "🤖"
+title: "はじめに"
+emoji: "👋"
 type: "tech"
 topics: ["security", "LLM", "AI", "agent"]
 published: false

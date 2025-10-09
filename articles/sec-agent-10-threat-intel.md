@@ -1,6 +1,6 @@
 ---
 title: "脅威インテリジェンスツールの実装"
-emoji: "🤖"
+emoji: "🛡️"
 type: "tech"
 topics: ["security", "ThreatIntelligence", "API", "integration"]
 published: false

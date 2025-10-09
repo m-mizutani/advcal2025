@@ -1,6 +1,6 @@
 ---
 title: "システムアーキテクチャと設計方針"
-emoji: "🤖"
+emoji: "🏗️"
 type: "tech"
 topics: ["security", "architecture", "LLM", "design"]
 published: false

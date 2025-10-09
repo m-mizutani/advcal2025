@@ -1,6 +1,6 @@
 ---
 title: "会話履歴の管理基盤"
-emoji: "🤖"
+emoji: "💬"
 type: "tech"
 topics: ["LLM", "SQLite", "database", "conversation"]
 published: false
