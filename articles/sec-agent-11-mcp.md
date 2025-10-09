@@ -6,7 +6,7 @@ topics: ["MCP", "ModelContextProtocol", "LLM", "tools"]
 published: false
 ---
 
-この記事はアドベントカレンダー「セキュリティアラート対応LLMエージェント実装 - 25日間」の11日目です。
+この記事はアドベントカレンダー「セキュリティ分析生成AIエージェントの実装」の11日目です。
 
 # Model Context Protocol (MCP) とは
 

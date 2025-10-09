@@ -6,7 +6,7 @@ topics: ["LLM", "FunctionCalling", "API", "tools"]
 published: false
 ---
 
-この記事はアドベントカレンダー「セキュリティアラート対応LLMエージェント実装 - 25日間」の9日目です。
+この記事はアドベントカレンダー「セキュリティ分析生成AIエージェントの実装」の9日目です。
 
 # Function Callingの仕組みと利点
 

@@ -6,7 +6,7 @@ topics: ["LLM", "data", "compression", "optimization"]
 published: false
 ---
 
-この記事はアドベントカレンダー「セキュリティアラート対応LLMエージェント実装 - 25日間」の13日目です。
+この記事はアドベントカレンダー「セキュリティ分析生成AIエージェントの実装」の13日目です。
 
 # 入力データcompactionの必要性
 

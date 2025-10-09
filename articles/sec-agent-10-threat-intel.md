@@ -6,7 +6,7 @@ topics: ["security", "ThreatIntelligence", "API", "integration"]
 published: false
 ---
 
-この記事はアドベントカレンダー「セキュリティアラート対応LLMエージェント実装 - 25日間」の10日目です。
+この記事はアドベントカレンダー「セキュリティ分析生成AIエージェントの実装」の10日目です。
 
 # AlienVault OTX APIの統合
 

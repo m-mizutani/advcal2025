@@ -1,5 +1,5 @@
-title: "セキュリティ分析LLMエージェント実装 - 2025年アドベントカレンダー"
-description: "25日間でLLMを使ったセキュリティ分析エージェントを構築"
+title: "セキュリティ分析生成AIエージェント実装 - 2025年アドベントカレンダー"
+description: "25日間で生成AIを使ったセキュリティ分析エージェントをGoで構築"
 start_date: 2025-10-07
 end_date: 2025-12-25
 
@@ -13,7 +13,7 @@ articles:
   # 10月7日〜12月24日まで均等配分（79日間で25記事 = 約3.2日に1記事）
   - day: 1
     slug: sec-agent-01-introduction
-    title: はじめに:LLMエージェントを利用した
+    title: はじめに:生成AIエージェントを利用した
     scheduled_date: 2025-12-01
     scheduled_time: "09:00"
     writing_deadline: 2025-10-10

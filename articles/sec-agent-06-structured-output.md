@@ -6,7 +6,7 @@ topics: ["LLM", "security", "IOC", "StructuredOutput"]
 published: false
 ---
 
-この記事はアドベントカレンダー「セキュリティアラート対応LLMエージェント実装 - 25日間」の6日目です。
+この記事はアドベントカレンダー「セキュリティ分析生成AIエージェントの実装」の6日目です。
 
 # JSON形式での出力指定
 

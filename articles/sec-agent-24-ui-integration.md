@@ -6,7 +6,7 @@ topics: ["WebUI", "Slack", "GraphQL", "integration"]
 published: false
 ---
 
-この記事はアドベントカレンダー「セキュリティアラート対応LLMエージェント実装 - 25日間」の24日目です。
+この記事はアドベントカレンダー「セキュリティ分析生成AIエージェントの実装」の24日目です。
 
 # warrenのWebUI/Slack統合アプローチ（解説）
 
