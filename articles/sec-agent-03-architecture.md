@@ -6,7 +6,7 @@ topics: ["security", "architecture", "LLM", "design"]
 published: false
 ---
 
-この記事はアドベントカレンダー「セキュリティ分析生成AIエージェントの実装」の3日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の3日目です。
 
 # CLI中心のアーキテクチャ選択理由
 

@@ -6,7 +6,7 @@ topics: ["LLM", "OpenAI", "Gemini", "API"]
 published: false
 ---
 
-この記事はアドベントカレンダー「セキュリティ分析生成AIエージェントの実装」の5日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の5日目です。
 
 # OpenAI/Gemini API接続の実装
 

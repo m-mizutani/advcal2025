@@ -6,7 +6,7 @@ topics: ["LLM", "embedding", "similarity", "search"]
 published: false
 ---
 
-この記事はアドベントカレンダー「セキュリティ分析生成AIエージェントの実装」の21日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の21日目です。
 
 # Embedding APIの利用（OpenAI/Gemini）
 

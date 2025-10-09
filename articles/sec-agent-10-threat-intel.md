@@ -6,7 +6,7 @@ topics: ["security", "ThreatIntelligence", "API", "integration"]
 published: false
 ---
 
-この記事はアドベントカレンダー「セキュリティ分析生成AIエージェントの実装」の10日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の10日目です。
 
 # AlienVault OTX APIの統合
 
