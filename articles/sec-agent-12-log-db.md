@@ -1,6 +1,6 @@
 ---
 title: "ログDBアクセスとコンテキストエンジニアリング"
-emoji: "🤖"
+emoji: "🗄️"
 type: "tech"
 topics: ["LLM", "database", "SQL", "context"]
 published: false

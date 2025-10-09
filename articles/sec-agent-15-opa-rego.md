@@ -1,6 +1,6 @@
 ---
 title: "Open Policy Agentとrego入門"
-emoji: "🤖"
+emoji: "📜"
 type: "tech"
 topics: ["OPA", "rego", "policy", "security"]
 published: false

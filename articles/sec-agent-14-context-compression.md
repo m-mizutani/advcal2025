@@ -1,6 +1,6 @@
 ---
 title: "会話コンテキストの圧縮戦略"
-emoji: "🤖"
+emoji: "📦"
 type: "tech"
 topics: ["LLM", "context", "compression", "embedding"]
 published: false

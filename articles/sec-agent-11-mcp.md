@@ -1,6 +1,6 @@
 ---
 title: "MCPで拡張可能なツール基盤"
-emoji: "🤖"
+emoji: "🔌"
 type: "tech"
 topics: ["MCP", "ModelContextProtocol", "LLM", "tools"]
 published: false

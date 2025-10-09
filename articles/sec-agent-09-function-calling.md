@@ -1,6 +1,6 @@
 ---
 title: "Function Callingで外部ツールと連携"
-emoji: "🤖"
+emoji: "🔧"
 type: "tech"
 topics: ["LLM", "FunctionCalling", "API", "tools"]
 published: false

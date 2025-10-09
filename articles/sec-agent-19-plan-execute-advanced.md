@@ -1,6 +1,6 @@
 ---
 title: "Plan & Execute (2) - 複雑な計画立案"
-emoji: "🤖"
+emoji: "🎯"
 type: "tech"
 topics: ["LLM", "agent", "PlanExecute", "optimization"]
 published: false

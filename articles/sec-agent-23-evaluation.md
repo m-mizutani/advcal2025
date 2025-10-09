@@ -1,6 +1,6 @@
 ---
 title: "エージェントの判断精度を測る"
-emoji: "🤖"
+emoji: "📈"
 type: "tech"
 topics: ["LLM", "evaluation", "testing", "quality"]
 published: false

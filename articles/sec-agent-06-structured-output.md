@@ -1,6 +1,6 @@
 ---
 title: "構造化出力でIOCを抽出する"
-emoji: "🤖"
+emoji: "📊"
 type: "tech"
 topics: ["LLM", "security", "IOC", "StructuredOutput"]
 published: false

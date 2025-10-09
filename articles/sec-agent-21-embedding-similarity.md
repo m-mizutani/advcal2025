@@ -1,6 +1,6 @@
 ---
 title: "Embeddingによる類似アラート検索"
-emoji: "🤖"
+emoji: "🔍"
 type: "tech"
 topics: ["LLM", "embedding", "similarity", "search"]
 published: false

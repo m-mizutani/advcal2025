@@ -1,6 +1,6 @@
 ---
 title: "プロンプトチューニングの基礎"
-emoji: "🤖"
+emoji: "✍️"
 type: "tech"
 topics: ["LLM", "prompt", "engineering", "AI"]
 published: false

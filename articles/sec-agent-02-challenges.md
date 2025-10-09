@@ -1,6 +1,6 @@
 ---
 title: "小規模SOCチームが直面する現実的課題"
-emoji: "🤖"
+emoji: "🚧"
 type: "tech"
 topics: ["security", "SOC", "LLM", "AI"]
 published: false

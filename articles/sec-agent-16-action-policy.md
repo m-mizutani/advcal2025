@@ -1,6 +1,6 @@
 ---
 title: "ポリシーベースの自動アクション"
-emoji: "🤖"
+emoji: "⚡"
 type: "tech"
 topics: ["OPA", "policy", "automation", "workflow"]
 published: false

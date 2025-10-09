@@ -1,6 +1,6 @@
 ---
 title: "Plan & Execute (3) - 動的再計画"
-emoji: "🤖"
+emoji: "🔄"
 type: "tech"
 topics: ["LLM", "agent", "PlanExecute", "replanning"]
 published: false

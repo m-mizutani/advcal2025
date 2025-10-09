@@ -1,6 +1,6 @@
 ---
 title: "Plan & Execute (1) - 基礎概念"
-emoji: "🤖"
+emoji: "📝"
 type: "tech"
 topics: ["LLM", "agent", "PlanExecute", "pattern"]
 published: false

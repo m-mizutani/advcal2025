@@ -1,6 +1,6 @@
 ---
 title: "WebUIとSlack連携の設計"
-emoji: "🤖"
+emoji: "🖥️"
 type: "tech"
 topics: ["WebUI", "Slack", "GraphQL", "integration"]
 published: false

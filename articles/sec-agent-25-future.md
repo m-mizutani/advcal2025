@@ -1,6 +1,6 @@
 ---
 title: "システム総括とマルチエージェントの未来"
-emoji: "🤖"
+emoji: "🌟"
 type: "tech"
 topics: ["LLM", "agent", "multiagent", "future"]
 published: false

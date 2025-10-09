@@ -1,6 +1,7 @@
 ---
 title: "はじめに：セキュリティ分析と生成AIエージェント"
 emoji: "🤖"
+emoji: "👋"
 type: "tech"
 topics: ["security", "LLM", "AI", "agent"]
 published: false
