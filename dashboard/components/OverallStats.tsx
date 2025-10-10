@@ -39,7 +39,7 @@ export default function OverallStats({ articles }: OverallStatsProps) {
       textColor: 'text-green-600 dark:text-green-400',
     },
     {
-      label: '平均進捗率',
+      label: '進捗率',
       value: `${averageProgress.toFixed(1)}%`,
       color: 'bg-indigo-500',
       textColor: 'text-indigo-600 dark:text-indigo-400',
