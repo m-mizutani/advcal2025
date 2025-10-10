@@ -32,8 +32,15 @@ export default function ProgressChart({ articles }: ProgressChartProps) {
 
     // 日付ごとのデータポイントを生成（週単位で表示）
     const currentDate = new Date(startDate);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    // タイムゾーンの問題を避けるため、文字列ベースで今日の日付を取得
+    // システム日付を基準にする（サーバー側で生成されるため、YAMLファイルの日付と一貫性がある）
+    const now = new Date();
+    const jstOffset = 9 * 60; // JST is UTC+9
+    const jstDate = new Date(now.getTime() + (jstOffset + now.getTimezoneOffset()) * 60000);
+    const todayStr = jstDate.toISOString().split('T')[0];
+
+    console.log('Today (JST):', todayStr);
+    console.log('Articles with completed_date:', articles.filter(a => a.completed_date).map(a => ({ slug: a.slug, completed_date: a.completed_date })));
 
     while (currentDate <= endDate) {
       const dateStr = currentDate.toISOString().split('T')[0];
@@ -42,9 +49,9 @@ export default function ProgressChart({ articles }: ProgressChartProps) {
       const completedByDeadline = articles.filter(a => a.writing_deadline <= dateStr).length;
       const planned = totalArticles - completedByDeadline;
 
-      // 実績線：完了した記事数を引いて「残り記事数」を計算
+      // 実績線：完了した記事数を引いて「残り記事数」を計算（文字列比較で行う）
       let actual: number | null = null;
-      if (currentDate <= today) {
+      if (dateStr <= todayStr) {
         const completedCount = articles.filter(a => {
           if (!a.completed_date) return false;
           return a.completed_date <= dateStr;
