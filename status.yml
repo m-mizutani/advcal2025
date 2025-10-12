@@ -25,15 +25,15 @@ articles:
 
   - day: 2
     slug: sec-agent-02-challenges
-    title: 小規模SOCチームが直面する現実的課題
+    title: セキュリティアラートの分析業務における課題と生成AIによる改善の可能性
     scheduled_date: 2025-12-02
     scheduled_time: "09:00"
     writing_deadline: 2025-10-13
     publication_deadline: 2025-12-01
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "headingのみで本文未記述"
+    status: completed
+    progress: 100
+    completed_date: 2025-10-12
+    notes: "published: true となっており全セクション記述完了"
 
   - day: 3
     slug: sec-agent-03-architecture
