@@ -42,22 +42,22 @@ articles:
     scheduled_time: "09:00"
     writing_deadline: 2025-10-16
     publication_deadline: 2025-12-02
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "headingのみで本文未記述"
+    status: completed
+    progress: 100
+    completed_date: 2025-10-13
+    notes: "published: true となっており全セクション記述完了"
 
   - day: 4
     slug: sec-agent-04-setup
-    title: 開発環境とベースコード理解
+    title: 開発環境の準備
     scheduled_date: 2025-12-04
     scheduled_time: "09:00"
     writing_deadline: 2025-10-19
     publication_deadline: 2025-12-03
-    status: not_started
-    progress: 0
+    status: in_progress
+    progress: 95
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "本文ほぼ完了しているが published: false のため未公開状態"
 
   - day: 5
     slug: sec-agent-05-llm-basics
@@ -69,7 +69,7 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "セクション見出しのみで本文未記述、published: false"
 
   - day: 6
     slug: sec-agent-06-structured-output
