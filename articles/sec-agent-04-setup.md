@@ -6,18 +6,20 @@ topics: ["Go", "security", "development", "CLI"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の4日目です。今回は開発環境のセットアップについて一通り解説し、明日からの開発が可能な状態にまでなるのが目的です。すでにGo言語の開発環境およびGoogle CloudやClaude (Anthropic) サービスを利用しており自力で設定可能な方は読む必要はありません。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の4日目です。今回は開発環境のセットアップについて一通り解説し、明日からの開発が可能な状態にまでなるのが目的です。開発環境の設定方法および、開発で利用するテンプレートのコードについて解説します。
 
-今回で準備が必要なのは以下のとおりです。
+# 開発環境の準備
+
+すでにGo言語の開発環境およびGoogle Cloudサービスを利用しており自力で設定可能な方は読む必要はありません。今回で準備が必要なのは以下のとおりです。
 
 - [ ] Goのローカル開発環境の用意
+  - [ ] エディタ
+  - [ ] Go環境のセットアップ
+  - [ ] テンプレートのコード取得
 - [ ] Google Cloud の Projectとリソースの作成
   - [ ] Firestore DB
   - [ ] Cloud Storage Bucket
   - [ ] Vertex AI (Gemini) の有効化
-- [ ] Claude サインアップとAPIキーの発行
-
-# 開発環境の準備
 
 ## エディタの用意
 
@@ -36,11 +38,9 @@ go version go1.25.x darwin/arm64  # バージョン番号とアーキテクチ�
 
 本シリーズではGo 1.25以降を想定していますが、それ以前のバージョンでも動作する可能性があります。
 
-# Goプロジェクトの構造説明
-
 ## GitHubからclone
 
-今回利用するプロジェクトは [leveret](https://github.com/m-mizutani/leveret) です。以下のいずれかの方法でコードを取得してください。
+今回利用するプロジェクトは [leveret](https://github.com/m-mizutani/leveret) です。以下のいずれかの方法でコードを取得してください。コードの構造などの解説は後述します。
 
 ### Git cloneでの取得
 
@@ -64,30 +64,6 @@ Gitがない環境や一時的に確認したい場合は、GitHubから直接�
 2. ブランチを `init` に切り替え
 3. 「Code」→「Download ZIP」からダウンロード
 4. 解凍して利用
-
-## プロジェクト構成の確認
-
-取得したプロジェクトは以下のような構成になっています。
-
-```
-leveret/
-├── cmd/
-│   └── leveret/          # CLIのエントリーポイント
-│       └── main.go
-├── pkg/
-│   ├── adapter/          # 外部サービス接続
-│   │   ├── claude.go     # Claude API
-│   │   └── gemini.go     # Gemini API
-│   ├── cli/              # CLIコマンド定義
-│   ├── model/            # データ構造定義
-│   ├── repository/       # データ永続化
-│   └── usecase/          # ビジネスロジック
-├── go.mod
-├── go.sum
-└── README.md
-```
-
-この構成は3日目の記事で解説したレイヤードアーキテクチャに対応しています。
 
 # Google Cloudのセットアップ
 
@@ -145,7 +121,7 @@ Firestoreはストレージ容量と読み書き操作に応じて課金され�
 
 ## Vertex AI (Gemini) の有効化
 
-アラートのEmbedding生成にGemini APIを使用するため、Vertex AIを有効化します。
+エージェントの対話的な分析、ツール呼び出し、およびアラートのEmbedding生成にGemini APIを使用するため、Vertex AIを有効化します。
 
 1. [Vertex AI画面](https://console.cloud.google.com/vertex-ai)にアクセス
 2. 「APIを有効にする」をクリック
@@ -153,9 +129,10 @@ Firestoreはストレージ容量と読み書き操作に応じて課金され�
 3. APIが有効化されるまで数分待つ
 
 :::message
-Vertex AIを通じてGemini Embeddingモデル（`text-embedding-004`）を利用します。[料金](https://cloud.google.com/vertex-ai/generative-ai/pricing)は以下の通りです。
+Vertex AIを通じてGemini 2.5モデル（対話・ツール呼び出し）とEmbeddingモデル（`text-embedding-004`）を利用します。[料金](https://cloud.google.com/vertex-ai/generative-ai/pricing)は以下の通りです。
+- Gemini 2.5 Flash: $0.075 / 1M入力トークン、$0.30 / 1M出力トークン
 - テキストEmbedding: $0.00001 / 1K characters
-- 本シリーズの用途であれば月額数セント〜数ドル程度に収まります
+- 本シリーズの用途であれば月額数ドル程度に収まります
 :::
 
 Vertex AIの認証は、前述のADC（Application Default Credentials）をそのまま利用できるため、追加の設定は不要です。
@@ -222,62 +199,6 @@ $ gcloud auth application-default login
 予算を設定しても、自動的に課金が停止されるわけではありません。アラートを受け取ったら速やかに確認し、必要に応じてリソースを削除してください。
 :::
 
-# Claude APIキーの準備
-
-## Claudeサービスへのサインアップ
-
-Claude APIを利用するため、Anthropicのアカウントを作成します。
-
-1. [Anthropic Console](https://console.anthropic.com/)にアクセス
-2. 「Sign Up」からアカウントを作成
-   - メールアドレスとパスワードを設定
-   - メール認証を完了
-3. ログイン後、プロフィール情報を入力
-
-## Claude APIキーの作成と課金設定
-
-### APIキーの作成
-
-1. [API Keys画面](https://console.anthropic.com/account/keys)にアクセス
-2. 「Create Key」をクリック
-3. キー名を入力（例: `leveret-dev`）
-4. APIキーが表示されるので**必ず保存**
-   - このタイミングでしか表示されません
-   - 紛失した場合は再作成が必要
-
-### 課金設定
-
-Claude APIを利用するには、支払い方法の登録が必要です。
-
-1. [Billing画面](https://console.anthropic.com/settings/billing)にアクセス
-2. 「Add Payment Method」でクレジットカードを登録
-3. 初回デポジット額を設定
-   - **最小額は$5**
-   - 本シリーズの実装であれば$5〜$10で十分です
-4. Workspaceの予算制限を設定
-   - [Workspaces設定](https://console.anthropic.com/settings/workspaces)で支出上限を設定可能
-   - 予期しない課金を防ぐため、$10程度の上限設定を推奨
-
-:::message
-Claude APIは従量課金制です。本シリーズで使用するClaude 3.5 Sonnetの料金は以下の通りです。
-- 入力: $3 / 1M tokens
-- 出力: $15 / 1M tokens
-
-通常の利用であれば月額数ドル程度に収まります。
-:::
-
-### APIキーの設定
-
-取得したAPIキーは環境変数で設定します。
-
-```bash
-# macOS/Linuxの場合 (~/.bashrc または ~/.zshrc に追記)
-export ANTHROPIC_API_KEY="sk-ant-..."
-
-# Windowsの場合 (環境変数を設定)
-set ANTHROPIC_API_KEY=sk-ant-...
-```
-
 # 用意されたベースコードの読み解き
 
 取得した `leveret` プロジェクトの `init` ブランチには、最小限の骨組みとなるコードが用意されています。ここでは主要な構成要素を確認します。
@@ -318,10 +239,10 @@ var NewCommand = &cli.Command{
     Action: func(ctx context.Context, c *cli.Command) error {
         // レポジトリとアダプターの初期化
         repo := repository.NewFirestore(...)
-        claude := adapter.NewClaude(...)
+        gemini := adapter.NewGemini(...)
 
         // ユースケースの作成と実行
-        uc := usecase.New(repo, claude)
+        uc := usecase.New(repo, gemini)
         return uc.CreateAlert(ctx, input)
     },
 }
@@ -379,43 +300,25 @@ func NewFirestore(projectID string) (Repository, error) {
 
 ## アダプター層 (`pkg/adapter/`)
 
-アダプター層は外部サービスとの接続を抽象化する層です。Claude APIやGemini APIといった外部サービスの具体的な呼び出し方法をこの層で隠蔽することで、上位層からは統一的なインターフェースで利用できるようにしています。また外部APIの仕様変更や別サービスへの切り替えが発生した場合も、この層のみを修正すれば済むため、保守性が高まります。
-
-### Claude Adapter (`claude.go`)
-
-```go
-// Claude はClaude APIクライアントのインターフェース
-type Claude interface {
-    Chat(ctx context.Context, messages []Message) (*Response, error)
-    // ...
-}
-
-type claudeAdapter struct {
-    apiKey string
-    client *anthropic.Client
-}
-
-func NewClaude(apiKey string) Claude {
-    // Claude APIクライアントの初期化
-    // ...
-}
-```
+アダプター層は外部サービスとの接続を抽象化する層です。Gemini APIといった外部サービスの具体的な呼び出し方法をこの層で隠蔽することで、上位層からは統一的なインターフェースで利用できるようにしています。また外部APIの仕様変更や別サービスへの切り替えが発生した場合も、この層のみを修正すれば済むため、保守性が高まります。
 
 ### Gemini Adapter (`gemini.go`)
 
 ```go
 // Gemini はGemini APIクライアントのインターフェース
 type Gemini interface {
+    Chat(ctx context.Context, messages []Message) (*Response, error)
     GenerateEmbedding(ctx context.Context, text string) ([]float64, error)
     // ...
 }
 
 type geminiAdapter struct {
-    apiKey string
-    client *genai.Client
+    projectID string
+    location  string
+    client    *genai.Client
 }
 
-func NewGemini(apiKey string) Gemini {
+func NewGemini(projectID, location string) Gemini {
     // Gemini APIクライアントの初期化
     // ...
 }
@@ -423,19 +326,17 @@ func NewGemini(apiKey string) Gemini {
 
 ## ユースケース層 (`pkg/usecase/`)
 
-ユースケース層はビジネスロジックの中核を担う層です。レポジトリ層とアダプター層を組み合わせることで、各コマンドの機能を実現します。例えばアラート作成処理では、まずJSONデータをパースし、次にClaude APIで要約を生成させ、Gemini APIでEmbeddingベクトルを作成し、最後にFirestoreへ保存するという一連の流れをこの層で制御します。
+ユースケース層はビジネスロジックの中核を担う層です。レポジトリ層とアダプター層を組み合わせることで、各コマンドの機能を実現します。例えばアラート作成処理では、まずJSONデータをパースし、次にGemini APIで要約を生成させ、同じくGemini APIでEmbeddingベクトルを作成し、最後にFirestoreへ保存するという一連の流れをこの層で制御します。
 
 ```go
 type UseCase struct {
     repo   repository.Repository
-    claude adapter.Claude
     gemini adapter.Gemini
 }
 
-func New(repo repository.Repository, claude adapter.Claude, gemini adapter.Gemini) *UseCase {
+func New(repo repository.Repository, gemini adapter.Gemini) *UseCase {
     return &UseCase{
         repo:   repo,
-        claude: claude,
         gemini: gemini,
     }
 }
@@ -443,7 +344,7 @@ func New(repo repository.Repository, claude adapter.Claude, gemini adapter.Gemin
 func (uc *UseCase) CreateAlert(ctx context.Context, data []byte) error {
     // アラート作成のロジック
     // 1. JSONをパース
-    // 2. Claude APIで要約生成
+    // 2. Gemini APIで要約生成
     // 3. Gemini APIでEmbedding生成
     // 4. Firestoreに保存
     // ...
@@ -462,7 +363,7 @@ func (uc *UseCase) CreateAlert(ctx context.Context, data []byte) error {
 $ leveret new -i alert.json
 ```
 
-このコマンドの処理の流れは以下のとおりです。まずJSON形式のアラートデータを受け取り、ポリシー判定を実行して受理するかどうかを判断します（ポリシー判定機能は15日目以降で実装します）。受理されたアラートはClaude APIで要約とIOC（侵害指標）を抽出し（5〜6日目で実装）、さらにGemini APIでEmbeddingベクトルを生成します（21日目で実装）。最後にこれらの情報をFirestoreに保存し、生成されたアラートIDを返します。
+このコマンドの処理の流れは以下のとおりです。まずJSON形式のアラートデータを受け取り、ポリシー判定を実行して受理するかどうかを判断します（ポリシー判定機能は15日目以降で実装します）。受理されたアラートはGemini APIで要約とIOC（侵害指標）を抽出し（5〜6日目で実装）、さらにGemini APIでEmbeddingベクトルを生成します（21日目で実装）。最後にこれらの情報をFirestoreに保存し、生成されたアラートIDを返します。
 
 ## chatコマンド
 
@@ -472,7 +373,7 @@ $ leveret new -i alert.json
 $ leveret chat <alert-id>
 ```
 
-まず指定されたIDのアラートをFirestoreから取得します。次にClaude APIとTool Callループを使って対話的な分析を進めます（9日目以降で実装）。この際、会話履歴はCloud Storageに保存されるため、分析を中断しても後から継続することができます（8日目で実装）。また類似アラートをベクトル検索で取得し、過去の対応事例をコンテキストとして活用することで、より適切な分析が可能になります（21日目で実装）。
+まず指定されたIDのアラートをFirestoreから取得します。次にGemini APIとTool Callループを使って対話的な分析を進めます（9日目以降で実装）。この際、会話履歴はCloud Storageに保存されるため、分析を中断しても後から継続することができます（8日目で実装）。また類似アラートをベクトル検索で取得し、過去の対応事例をコンテキストとして活用することで、より適切な分析が可能になります（21日目で実装）。
 
 ## listコマンド
 
@@ -574,7 +475,6 @@ VS Codeを使用している場合、デバッグ設定を追加することで�
             "program": "${workspaceFolder}",
             "args": ["new", "-i", "testdata/alert.json"],
             "env": {
-                "ANTHROPIC_API_KEY": "${env:ANTHROPIC_API_KEY}",
                 "GOOGLE_CLOUD_PROJECT": "your-project-id"
             }
         }
@@ -625,10 +525,9 @@ $ go test -v ./...
 
 - Go開発環境のセットアップ
 - Google Cloud（Firestore、Cloud Storage、Vertex AI）の設定
-- Claude APIの準備
 - `leveret` プロジェクトの取得と構造理解
 
-`init` ブランチには最小限の骨組みが用意されています。明日以降、この骨組みに機能を追加していきます。まずはClaude APIとの統合から始め、アラート要約機能を実装します。
+`init` ブランチには最小限の骨組みが用意されています。明日以降、この骨組みに機能を追加していきます。まずはGemini APIとの統合から始め、アラート要約機能を実装します。
 
 開発環境が整ったので、次回からは実際にコードを書いていきましょう。LLMとの対話、ツール呼び出し、ポリシー処理など、エージェントの中核機能を段階的に実装していきます。
 

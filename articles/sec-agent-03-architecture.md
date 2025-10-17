@@ -18,7 +18,7 @@ https://github.com/m-mizutani/leveret
 
 まず、今回構築するエージェントの機能的な概要について説明します。本エージェントはセキュリティアラートをJSON形式で受け取り、LLMと外部ツールを活用して分析を行います。ユーザーは対話的に調査を進めることができ、最終的な結論を記録として残すことができます。受け付けたアラートはデータベースに保存され、検索したり整理したりといった管理機能も提供します。これらの操作は全てCLIで動作し、コマンドラインから各種操作を実行する形になります。
 
-今回は生成AIサービスとして、エージェントの動作制御にClaudeを、アラートの類似度検索のためのEmbeddingにGeminiを利用します。Claudeは対話的な分析やツール呼び出しといったエージェントの主要な機能を担い、Geminiは過去のアラートとの類似性を計算してコンテキスト情報を提供する役割を果たします。これはClaude sonnet4系の方がGemini 2.5系に比べてエージェント呼び出しなどが[安定しているという報告](https://dev.to/composiodev/claude-sonnet-4-vs-gemini-25-pro-coding-comparison-5787)があり、筆者自身もそのような体感があるためエージェント実行にはClaude sonnet 4.5を採用します。一方、ClaudeはEmbedding機能を直接提供していないため、それについてはGeminiを利用するという戦略にしています。
+今回は生成AIサービスとして、Google Gemini APIを利用します。Geminiはエージェントの動作制御、対話的な分析、ツール呼び出し、そしてアラートの類似度検索のためのEmbedding生成など、全ての機能を一貫して担当します。Gemini 2.5系はマルチモーダル対応、強力な推論能力、そして豊富なツール連携機能を備えており、セキュリティ分析エージェントに必要な機能を包括的にサポートしています。また、Vertex AI経由で利用することで、Google Cloudの他サービスとのシームレスな連携も実現できます。
 
 
 ```mermaid
@@ -26,23 +26,19 @@ graph LR
     User[ユーザー]
     Alert[アラート<br/>JSON]
     Agent[エージェント<br/>CLI]
-    Claude[Claude API<br/>対話・分析]
-    Gemini[Gemini API<br/>Embedding]
+    Gemini[Gemini API<br/>対話・分析・Embedding]
     Tools[外部ツール<br/>脅威Intel/ログDB等]
     DB[(データベース<br/>Firestore)]
 
     Alert -->|new| Agent
     User <-->|chat| Agent
-    Agent <-->|分析依頼| Claude
-    Claude <-->|Tool Call| Agent
+    Agent <-->|分析依頼| Gemini
+    Gemini <-->|Tool Call| Agent
     Agent -->|ツール実行| Tools
-    Agent -->|Embedding生成| Gemini
-    Gemini -->|ベクトル| Agent
     Agent <-->|保存/検索| DB
     User -->|list/merge| Agent
 
     style Agent fill:#e1f5ff
-    style Claude fill:#ffe1f5
     style Gemini fill:#e1ffe1
     style Tools fill:#f0f0f0
 ```
@@ -98,7 +94,6 @@ graph TB
 
     Firestore[(Firestore)]
     Storage[(Cloud Storage)]
-    Claude[Claude API]
     Gemini[Gemini API]
 
     User -->|コマンド実行| CLI
@@ -107,8 +102,7 @@ graph TB
     UseCase -->|インターフェース経由| Adapter
     Repo -->|永続化| Firestore
     Adapter -->|会話履歴保存| Storage
-    Adapter -->|対話・分析| Claude
-    Adapter -->|Embedding| Gemini
+    Adapter -->|対話・分析・Embedding| Gemini
 
     UseCase -.->|参照| Model
     Repo -.->|参照| Model
@@ -139,7 +133,7 @@ graph TB
 
 アダプター層は外部サービスとの接続を抽象化する層です。まず会話履歴保存のためのストレージ用インターフェースを持ちます。今回はCloud Storageを利用します。ファイルシステムでも実装可能ですが、Firestoreがリモートにあるため平仄を揃える形でCloud Storageを選択しています。
 
-またLLMへアクセスするためのインターフェースもこの層で定義します。Claudeは対話的な分析とツール呼び出しに利用し、GeminiはEmbedding生成（アラートのベクトル化）に利用します。それぞれのSDKをwrapするクライアントを持つことで、上位層からは具体的なAPI実装の詳細を隠蔽しています。
+またLLMへアクセスするためのインターフェースもこの層で定義します。Gemini APIを対話的な分析、ツール呼び出し、そしてEmbedding生成（アラートのベクトル化）の全てに利用します。Gemini SDKをwrapするクライアントを持つことで、上位層からは具体的なAPI実装の詳細を隠蔽しています。
 
 ## モデル層 ( `pkg/model` )
 
@@ -326,7 +320,7 @@ ignore if {
 sequenceDiagram
     participant User as ユーザー
     participant App as エージェント
-    participant LLM as Claude API
+    participant LLM as Gemini API
     participant Tool as 外部ツール<br/>(脅威Intel等)
 
     User->>App: 指示（アラート分析して）
@@ -402,7 +396,7 @@ stateDiagram-v2
 
 アラートの処理はまず登録から始まります。JSON形式でアラートを投入すると、システムはIDを返します。この時点でポリシーによりアラートとして取り扱うかの判定を行います。却下された場合はここで処理が終了します。
 
-受理されたアラートについては、Claude APIを利用してタイトル、要約、属性値の抽出を行います。この段階で構造化された情報をDBに保存します。同時にGemini APIでアラートのEmbeddingベクトルを生成し、Firestoreに保存します。このベクトルは後続の類似アラート検索で活用されます。
+受理されたアラートについては、Gemini APIを利用してタイトル、要約、属性値の抽出を行います。この段階で構造化された情報をDBに保存します。同時にGemini APIでアラートのEmbeddingベクトルを生成し、Firestoreに保存します。このベクトルは後続の類似アラート検索で活用されます。
 
 ### アラートの閲覧（`list`コマンド）
 
