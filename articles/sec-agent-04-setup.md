@@ -20,10 +20,11 @@ published: false
   - [ ] Firestore DB
   - [ ] Cloud Storage Bucket
   - [ ] Vertex AI (Gemini) の有効化
+- [ ] Claude サインアップとAPIキーの発行
 
 ## エディタの用意
 
-まず開発に使用するエディタを準備します。基本的にはお好みのエディタで問題ありませんが、VS Codeを推奨します。VS Codeを使用する場合は、[Go extension](https://marketplace.visualstudio.com/items?itemName=golang.go)をインストールしてください。この拡張機能により、デバッグ機能、コード補完、フォーマッターなどが利用可能になり、開発効率が大幅に向上します。他のエディタを使用する場合も、Go言語のサポートが充実しているものを選ぶと良いでしょう。
+まず開発に使用するエディタを準備します。基本的にはお好みのエディタで問題ありませんが、VS Codeを推奨します。VS Codeを使用する場合は、[Go extension](https://marketplace.visualstudio.com/items?itemName=golang.go)をインストールをおすすめします。この拡張機能により、デバッグ機能、コード補完、フォーマッターなどが利用可能になり、開発効率が向上します。他のエディタを使用する場合も、Go言語のサポートが充実しているものを選ぶと良いでしょう。
 
 ## Go環境のセットアップ
 
