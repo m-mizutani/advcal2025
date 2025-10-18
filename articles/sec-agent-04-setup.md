@@ -1,12 +1,12 @@
 ---
-title: "開発環境の準備"
+title: "開発環境の準備と事前実装済みコードの説明"
 emoji: "⚙️"
 type: "tech"
 topics: ["Go", "security", "development", "CLI"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の4日目です。今回は開発環境のセットアップについて一通り解説し、明日からの開発が可能な状態にまでなるのが目的です。開発環境の設定方法および、開発で利用するテンプレートのコードについて解説します。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の4日目です。今回は開発環境のセットアップについて一通り解説し、明日からの開発が可能な状態にまでなるのが目的です。開発環境の設定方法および、開発で利用するためにこちらで事前実装したテンプレートのコードについて解説します。
 
 # 開発環境の準備
 
@@ -68,9 +68,14 @@ Gitがない環境や一時的に確認したい場合は、GitHubから直接�
 
 # Google Cloudのセットアップ
 
+今回の開発においてコードを動かすのはローカル環境ですが、LLMやデータストアなどはクラウド上のものを利用します。あまり課金は発生しない見込みですが、このアドベントカレンダーの内容を一通り実施すると数ドル程度の課金が発生する見込みです。
+
+- Google Cloudを初めて利用する場合、[$300分の無料クレジット](https://cloud.google.com/free)が提供されるのでこれを活用するのも良いでしょう
+- あらかじめ設定した課金額の超過を警告する設定も後述するので、参考にしてください
+
 ## サインアップ・プロジェクト作成
 
-Google Cloudを初めて利用する場合、[$300分の無料クレジット](https://cloud.google.com/free)が提供されます。以下の手順でセットアップを行います。
+まずGoogle Cloudを利用したことがない、あるいはプロジェクトを分けて準備したい方は新たにプロジェクトを作成してください。以下の手順でセットアップを行います。
 
 1. [Google Cloud Console](https://console.cloud.google.com/)にアクセス
 2. Googleアカウントでサインイン（アカウントがない場合は作成）
@@ -87,6 +92,18 @@ Google Cloudを初めて利用する場合、[$300分の無料クレジット](h
 アラート情報やベクトルデータを保存するためにFirestoreを有効化します。
 
 Firestoreを利用するのはベクタ検索を利用したいためです。ベクタ検索をする場合はインデックスを作成する必要がありますが、これは後日設定します。
+
+### API有効化
+
+まずFirestore APIを有効化します。
+
+1. [Firestore API有効化リンク](https://console.cloud.google.com/flows/enableapi?apiid=firestore.googleapis.com)にアクセス
+2. 「APIを有効にする」をクリック
+3. APIが有効化されるまで数秒待つ
+
+### データベース作成
+
+次にFirestoreデータベースを作成します。
 
 1. [Firestore画面](https://console.cloud.google.com/firestore)にアクセス
 2. 「データベースの作成」をクリック
@@ -106,6 +123,18 @@ Firestoreはストレージ容量と読み書き操作に応じて課金され�
 ## Cloud Storage有効化とバケット作成
 
 会話履歴を保存するためにCloud Storageバケットを作成します。
+
+### API有効化
+
+まずCloud Storage APIを有効化します。
+
+1. [Cloud Storage API有効化リンク](https://console.cloud.google.com/flows/enableapi?apiid=storage-api.googleapis.com)にアクセス
+2. 「APIを有効にする」をクリック
+3. APIが有効化されるまで数秒待つ
+
+### バケット作成
+
+次にCloud Storageバケットを作成します。
 
 1. [Cloud Storage画面](https://console.cloud.google.com/storage)にアクセス
 2. 「バケットを作成」をクリック
@@ -140,32 +169,14 @@ Vertex AIの認証は、前述のADC（Application Default Credentials）をそ�
 
 ## gcloudツールのインストールとADCの認証
 
-ローカル開発環境からGoogle Cloudにアクセスするため、[gcloud CLI](https://cloud.google.com/sdk/docs/install)をインストールします。
+ローカル開発環境からGoogle Cloudにアクセスするため、gcloud CLIをインストールします。
 
-### インストール手順
+### インストール
 
-#### macOS/Linuxの場合
+[gcloud CLIのインストール公式ドキュメント](https://cloud.google.com/sdk/docs/install)を参照してインストールしてください。インストール後、初期化を実行します。
 
 ```bash
-# インストーラーをダウンロードして実行
-$ curl https://sdk.cloud.google.com | bash
-
-# シェルを再起動
-$ exec -l $SHELL
-
-# 初期化
 $ gcloud init
-```
-
-#### Windowsの場合
-
-1. [Google Cloud SDK インストーラー](https://cloud.google.com/sdk/docs/install)をダウンロード
-2. インストーラーを実行
-3. コマンドプロンプトまたはPowerShellを再起動
-4. 初期化
-
-```powershell
-> gcloud init
 ```
 
 ### Application Default Credentials (ADC) の設定
@@ -200,155 +211,159 @@ $ gcloud auth application-default login
 予算を設定しても、自動的に課金が停止されるわけではありません。アラートを受け取ったら速やかに確認し、必要に応じてリソースを削除してください。
 :::
 
-# 用意されたベースコードの読み解き
+# 開発用テンプレートコードの解説
 
-取得した `leveret` プロジェクトの `init` ブランチには、最小限の骨組みとなるコードが用意されています。ここでは主要な構成要素を確認します。
+取得した `leveret` プロジェクトの `init` ブランチには、最小限の骨組みとなるコードが用意されています。ここでは主要な構成要素を確認します。大枠としての構造は前日に説明したとおりとなりますが、ここでは実際のコードと付き合わせて確認していきます。
 
-## エントリーポイント (`main.go`)
+ここではテンプレート時点ですでに実装がほぼ終わっているコンポーネントを✅、これから改修などが必要になるものについて🚧で表現しています。
 
-CLIアプリケーションのエントリーポイントです。[urfave/cli/v3](https://cli.urfave.org/)を使用してコマンドライン引数をパースし、サブコマンドを実行します。
+## ✅ エントリーポイント (`main.go`)
+
+CLIアプリケーションのエントリーポイントです。Goコマンドによるインストールの容易さのためにトップレベルに `main.go` だけを配置しています。実装は非常にシンプルで、`pkg/cli` パッケージの `Run` 関数を呼び出し、エラーハンドリングを行うだけです。
 
 ```go
 func main() {
-    cmd := &cli.Command{
-        Name:  "leveret",
-        Usage: "Security alert analysis agent",
-        Commands: []*cli.Command{
-            cli.NewCommand,    // newコマンド
-            cli.ChatCommand,   // chatコマンド
-            cli.ListCommand,   // listコマンド
-            // ... 他のコマンド
-        },
+    ctx := context.Background()
+    if err := cli.Run(ctx, os.Args); err != nil {
+        os.Exit(err.Code)
     }
-    cmd.Run(context.Background(), os.Args)
 }
 ```
 
-## CLI層 (`pkg/cli/`)
+## ✅ フレームワーク層 (`pkg/cli/`)
 
-CLI層は各サブコマンドの定義と、コマンドライン引数の処理を担当する層です。まずコマンドライン引数をパースし、必要な環境変数や設定ファイルを読み込みます。次にこれらの情報を元にレポジトリとアダプターのインスタンスを作成し、最後にそれらをユースケース層へDI（依存性注入）することで、ビジネスロジックの実行準備を整えます。
+CLI層は各サブコマンドの定義と、コマンドライン引数の処理を担当する層です。ここではコマンドラインやテキスト入力とユースケースとの橋渡しをするのが責務です。
 
-例えば `new.go` では以下のような構造になっています。
+まずコマンドライン引数をパースし、必要な環境変数や設定ファイルを読み込みます。次にこれらの情報を元にレポジトリとアダプターのインスタンスを作成し、最後にそれらをユースケース層へ注入することで、ビジネスロジックの実行準備を整えます。
+
+`cli.go` でメインコマンドを定義し、各サブコマンドを登録します。ここが `main.go` との接続点になります。例えば `new` サブコマンドは `newCommand()` を渡してサブコマンドを登録しています。
 
 ```go
-var NewCommand = &cli.Command{
-    Name:  "new",
-    Usage: "Create a new alert from JSON input",
-    Flags: []cli.Flag{
-        &cli.StringFlag{Name: "input", Aliases: []string{"i"}},
-    },
-    Action: func(ctx context.Context, c *cli.Command) error {
-        // レポジトリとアダプターの初期化
-        repo := repository.NewFirestore(...)
-        gemini := adapter.NewGemini(...)
+cmd := &cli.Command{
+    Name:  "leveret",
+    Usage: "Security alert analysis agent",
+    Commands: []*cli.Command{
+        newCommand(),
+        chatCommand(),
+        // ...略...
+```
 
-        // ユースケースの作成と実行
-        uc := usecase.New(repo, gemini)
-        return uc.CreateAlert(ctx, input)
-    },
+この実装のオプションの取り方のポイントの一つとしては、各コマンドで共通の設定を `config` 構造体で管理している点です。各コマンドで共通しうる（しかし完全に共通ではない）設定値は `type config struct` で管理しており、フラグの設定もこの構造体から供出されます。
+
+```go
+type config struct {
+    // Repository
+    firestoreProject string
+    database         string
+
+    // Adapters
+    geminiProject         string
+    geminiGenerativeModel string
+    geminiEmbeddingModel  string
+
+    // Storage
+    bucketName    string
+    storagePrefix string
 }
 ```
 
-## モデル層 (`pkg/model/`)
+設定値はコマンドラインフラグまたは環境変数から取得します。`globalFlags()` と `llmFlags()` でフラグ定義をまとめており、各コマンドで再利用できます。
 
-システム全体で使用するデータ構造を定義します。
+## 🚧 モデル層 (`pkg/model/`)
+
+システム全体で使用するデータ構造を定義します。基本は `Alert` と `History` ですが、いくらか追加修正をする見込みです。
+
+### `Alert` 構造体
+
+受信したアラートのデータおよびそこから得られた付加情報を表現します。先日説明した通り、実データや属性値などを持ちます。
 
 ```go
-// Alert はセキュリティアラートを表す構造体
 type Alert struct {
     ID          AlertID
     Title       string
     Description string
     Data        any
     Attributes  []*Attribute
-    CreatedAt   time.Time
-    // ...
-}
-
-// Attribute はアラートから抽出された属性値
-type Attribute struct {
-    Key   string
-    Value string
-    Type  AttributeType
-}
+    // 以下略
 ```
 
-この構造は3日目の記事で解説したデータモデルに対応しています。
+### `History` 構造体
 
-## レポジトリ層 (`pkg/repository/`)
-
-レポジトリ層はFirestoreへのデータ永続化を担当する層です。この層の特徴は、データ永続化のインターフェースとFirestoreという具体的な実装が分離されている点です。これによりテスト時にはモック実装に差し替えることができ、また将来的に別のデータベースへ移行する際にもこの層だけを書き換えれば済むようになっています。
+どのアラートと会話履歴データが紐づくかを表現するモデルです。会話データの実態はCloud Storageに保管しますが、紐づけ情報は高速に検索できるように別モデルで管理し、DBに配置します。
 
 ```go
-// Repository はデータ永続化のインターフェース
+// History represents a conversation history for alert analysis
+type History struct {
+	ID        HistoryID
+	Title     string
+	AlertID   AlertID
+    // 以下略
+```
+
+## 🚧 レポジトリ層 (`pkg/repository/`)
+
+レポジトリ層はFirestoreへのデータ永続化を担当する層です。この層の特徴は、データ永続化のインターフェースとFirestoreという具体的な実装が分離されている点です。
+
+`repository.go` でインターフェースを定義しています。
+
+```go
 type Repository interface {
-    SaveAlert(ctx context.Context, alert *model.Alert) error
+    PutAlert(ctx context.Context, alert *model.Alert) error
     GetAlert(ctx context.Context, id model.AlertID) (*model.Alert, error)
-    ListAlerts(ctx context.Context, filters ...Filter) ([]*model.Alert, error)
-    // ...
-}
+    ListAlerts(ctx context.Context, offset, limit int) ([]*model.Alert, error)
+    SearchSimilarAlerts(ctx context.Context, embedding []float64, limit int) ([]*model.Alert, error)
 
-// firestoreRepo はFirestore実装
-type firestoreRepo struct {
-    client *firestore.Client
-}
-
-func NewFirestore(projectID string) (Repository, error) {
-    // Firestoreクライアントの初期化
-    // ...
+    PutHistory(ctx context.Context, history *model.History) error
+    GetHistory(ctx context.Context, id model.HistoryID) (*model.History, error)
+    ListHistory(ctx context.Context, offset, limit int) ([]*model.History, error)
 }
 ```
 
-## アダプター層 (`pkg/adapter/`)
+`firestore.go` でFirestoreを使った実装を提供しています。`SearchSimilarAlerts` はベクトル検索を行うメソッドで、Embedding値を渡すと類似したアラートを返します。これは追って実装しますが、他の部分はほぼ実装済みとなっています。
 
-アダプター層は外部サービスとの接続を抽象化する層です。Gemini APIといった外部サービスの具体的な呼び出し方法をこの層で隠蔽することで、上位層からは統一的なインターフェースで利用できるようにしています。また外部APIの仕様変更や別サービスへの切り替えが発生した場合も、この層のみを修正すれば済むため、保守性が高まります。
+テスト時にはモック実装に差し替えることができ、また将来的に別のデータベースへ移行する際にもこの層だけを書き換えれば済みます。今回の実装でも、もしFirestore以外を利用したかったらこの層を自由なデータベース用に書き換えていただいて大丈夫です（ただしEmbedding関連処理においてベクトル検索ができる必要があります）。
 
-### Gemini Adapter (`gemini.go`)
+## ✅ アダプター層 (`pkg/adapter/`)
+
+アダプター層は外部サービスとの接続を抽象化する層です。GeminiやCloud Storageのような外部サービスの具体的な呼び出し方法をこの層で隠蔽することで、上位層からは統一的なインターフェースで利用できるようにしています。またメソッドを簡易化することでテストのためにモックを作成しやすいというのも特徴です。
+
+### ✅ Gemini Adapter (`gemini.go`)
+
+Gemini APIとの接続を抽象化します。基本的には `google.golang.org/genai` の `Client` 構造体を少しwrapしている程度で、複雑なことは特にしていません。
+
+実装では、生成モデル（`gemini-2.5-flash`）とEmbeddingモデル（`gemini-embedding-001`）をデフォルト値としています。
+
+### ✅ Cloud Storage (`storage.go`)
+
+Cloud Storageへの会話履歴の保存を抽象化します。ファイルのアップロードとダウンロードのみのシンプルな機能を提供します。
+
+## 🚧 ユースケース層 (`pkg/usecase/`)
+
+ユースケース層はビジネスロジックの中核を担う層です。レポジトリ層とアダプター層を組み合わせることで、各コマンドの機能を実現します。この層は今回のアドベントカレンダーにおいて多く書き換えをしていくことになります。
+
+機能ごとにサブパッケージを分けています。
+
+- `pkg/usecase/alert/` - アラート関連の操作（insert, list, show, search, resolve, merge, unmerge）
+- `pkg/usecase/chat/` - 対話セッション関連の操作
+- `pkg/usecase/history/` - 履歴管理関連の操作
+
+例えばアラート作成処理（`alert/insert.go`）では、現時点では単純にアラートIDを生成してFirestoreに保存するだけですが、今後LLMによる要約生成やEmbedding生成などの処理を追加していきます。
 
 ```go
-// Gemini はGemini APIクライアントのインターフェース
-type Gemini interface {
-    Chat(ctx context.Context, messages []Message) (*Response, error)
-    GenerateEmbedding(ctx context.Context, text string) ([]float64, error)
-    // ...
-}
-
-type geminiAdapter struct {
-    projectID string
-    location  string
-    client    *genai.Client
-}
-
-func NewGemini(projectID, location string) Gemini {
-    // Gemini APIクライアントの初期化
-    // ...
-}
-```
-
-## ユースケース層 (`pkg/usecase/`)
-
-ユースケース層はビジネスロジックの中核を担う層です。レポジトリ層とアダプター層を組み合わせることで、各コマンドの機能を実現します。例えばアラート作成処理では、まずJSONデータをパースし、次にGemini APIで要約を生成させ、同じくGemini APIでEmbeddingベクトルを作成し、最後にFirestoreへ保存するという一連の流れをこの層で制御します。
-
-```go
-type UseCase struct {
-    repo   repository.Repository
-    gemini adapter.Gemini
-}
-
-func New(repo repository.Repository, gemini adapter.Gemini) *UseCase {
-    return &UseCase{
-        repo:   repo,
-        gemini: gemini,
+func (u *UseCase) Insert(ctx context.Context, data any) (*model.Alert, error) {
+    alert := &model.Alert{
+        ID:        model.NewAlertID(),
+        Data:      data,
+        CreatedAt: time.Now(),
     }
-}
 
-func (uc *UseCase) CreateAlert(ctx context.Context, data []byte) error {
-    // アラート作成のロジック
-    // 1. JSONをパース
-    // 2. Gemini APIで要約生成
-    // 3. Gemini APIでEmbedding生成
-    // 4. Firestoreに保存
-    // ...
+    // ここに生成AI関連の様々な処理を足していく
+
+    if err := u.repo.PutAlert(ctx, alert); err != nil {
+        return nil, err
+    }
+
+    return alert, nil
 }
 ```
 
@@ -356,179 +371,130 @@ func (uc *UseCase) CreateAlert(ctx context.Context, data []byte) error {
 
 `leveret` は複数のサブコマンドで構成されています。`init` ブランチでは骨組みのみが実装されており、今後の記事で段階的に機能を追加していきます。
 
-## newコマンド
-
-`new`コマンドはアラートを新規登録するコマンドです。
-
-```bash
-$ leveret new -i alert.json
 ```
-
-このコマンドの処理の流れは以下のとおりです。まずJSON形式のアラートデータを受け取り、ポリシー判定を実行して受理するかどうかを判断します（ポリシー判定機能は15日目以降で実装します）。受理されたアラートはGemini APIで要約とIOC（侵害指標）を抽出し（5〜6日目で実装）、さらにGemini APIでEmbeddingベクトルを生成します（21日目で実装）。最後にこれらの情報をFirestoreに保存し、生成されたアラートIDを返します。
-
-## chatコマンド
-
-`chat`コマンドは既存のアラートに対して対話的な分析を行うコマンドです。
-
-```bash
-$ leveret chat <alert-id>
-```
-
-まず指定されたIDのアラートをFirestoreから取得します。次にGemini APIとTool Callループを使って対話的な分析を進めます（9日目以降で実装）。この際、会話履歴はCloud Storageに保存されるため、分析を中断しても後から継続することができます（8日目で実装）。また類似アラートをベクトル検索で取得し、過去の対応事例をコンテキストとして活用することで、より適切な分析が可能になります（21日目で実装）。
-
-## listコマンド
-
-`list`コマンドは登録されているアラートの一覧を表示するコマンドです。
-
-```bash
-$ leveret list
-$ leveret list -a  # マージ済みも含めて表示
-```
-
-Firestoreから全アラートを取得し、ID、タイトル、作成日時、要約を表示します。デフォルトでは既にマージ済みのアラートは除外されますが、`-a`オプションを指定することでマージ済みのアラートも含めて全件表示することができます。これによりアラートの全体像を把握したり、過去の対応履歴を確認したりすることができます。
-
-## resolveコマンド
-
-`resolve`コマンドは分析が完了したアラートを解決状態にするコマンドです。
-
-```bash
-$ leveret resolve <alert-id>
-```
-
-指定されたIDのアラートに対して、分析結果の結論を記録してアラートを解決状態にします。解決時には「影響のあるアラートだった」「誤検知だった」などの記録を残すことができ、後から参照することが可能です。
-
-## mergeコマンド
-
-`merge`コマンドは類似するアラートを統合するコマンドです。
-
-```bash
-$ leveret merge <source-alert-id> <target-alert-id>
-```
-
-`source-alert-id`で指定したアラートを`target-alert-id`で指定したアラートに統合します。実態としては`MergedTo`フィールドに統合先IDを設定します。マージされたアラートは以降`list`コマンドで表示されなくなります。
-
-## unmergeコマンド
-
-`unmerge`コマンドは誤ってマージしたアラートを元に戻すコマンドです。
-
-```bash
-$ leveret unmerge <alert-id>
-```
-
-指定されたIDのアラートのマージを解除し、再び独立したアラートとして扱えるようにします。`MergedTo`フィールドをクリアすることで、`list`コマンドでも再び表示されるようになります。
-
-# 開発フロー：ビルド、実行、デバッグ
-
-## ビルド
-
-プロジェクトルートで以下のコマンドを実行することで、実行可能ファイルをビルドできます。
-
-```bash
-$ cd leveret
-$ go build -o leveret
-```
-
-ビルドが成功すると、カレントディレクトリに実行可能ファイル `leveret` が生成されます。このファイルを実行することで、後述するサブコマンドを利用できるようになります。
-
-## 実行
-
-ビルドした実行ファイルを直接実行できます。`--help`オプションを付けることで、利用可能なコマンドの一覧を確認できます。
-
-```bash
-$ ./leveret --help
 NAME:
    leveret - Security alert analysis agent
 
 USAGE:
-   leveret [global options] command [command options] [arguments...]
+   leveret [global options] [command [command options]]
 
 COMMANDS:
    new      Create a new alert from JSON input
    chat     Interactive analysis of an alert
    list     List all alerts
+   show     Show detailed information of a specific alert
+   search   Search for similar alerts using vector similarity
+   resolve  Mark an alert as resolved
+   merge    Merge an alert into another
+   unmerge  Unmerge a merged alert
    help, h  Shows a list of commands or help for one command
-
-GLOBAL OPTIONS:
-   --help, -h  show help
 ```
 
-またビルドせずに `go run` で直接実行することもできます。開発中の動作確認ではこちらの方が手軽です。
+細かい説明は実装を進めるとともにしますが、環境設定の確認を簡単に以下の手順で実施します。
+
+## `new` コマンドでのアラート作成
+
+`new` コマンドは、JSON形式のアラートデータを受け取り、新規アラートとして登録します。コマンドの実行は、現時点でのコードをそのまま実行するために `go run .` を使います。ソースコードを展開したルートディレクトリに移動してから実行してください。
+
+またテンプレートにサンプルのアラートデータ（ `examples/alert/guardduty.json` ）も含まれているのでそれを読み込ませます。
 
 ```bash
-$ go run . --help
+$ go run . new -i examples/alert/guardduty.json --firestore-project your-project-id --firestore-database database-id
+Alert created: 550e8400-e29b-41d4-a716-446655440000
 ```
 
-## デバッグ
+現時点の実装では、以下の処理を行います。
 
-### VS Codeでのデバッグ
+1. 指定されたJSONファイルを読み込み
+2. 一意なアラートIDを生成（UUID）
+3. アラートデータをFirestoreに保存
+4. 生成されたアラートIDを出力
 
-VS Codeを使用している場合、デバッグ設定を追加することでブレークポイントを設定したデバッグ実行が可能になります。プロジェクトルートに `.vscode/launch.json` を作成し、以下の設定を追加してください。
+今後の記事で、LLMによるタイトル・要約の生成、属性値の抽出、Embedding生成などの機能を追加していきます。
 
-```json
+## `list` コマンドでの一覧確認と `show` コマンドでの詳細確認
+
+アラートが適切に登録されているかを確認するには `list` コマンドを使います。登録されているアラートの一覧を表示します。
+
+例）
+```bash
+$ go run . list --firestore-project your-project-id --firestore-database database-id
+550e8400-e29b-41d4-a716-446655440000    GuardDuty Alert    active
+660e8400-e29b-41d4-a716-446655440001    CloudTrail Alert   resolved
+770e8400-e29b-41d4-a716-446655440002    WAF Alert          merged to 550e8400-e29b-41d4-a716-446655440000
+```
+
+ただし現在はタイトルを埋める機能を提供していないため、Alert IDとステータスのみが表示されるでしょう。
+
+Alert IDが確認できたらそれをもとに `show` コマンドを使って詳細を確認します。特定のアラートの詳細情報をJSON形式で表示します。
+
+```bash
+$ go run . show --alert-id 550e8400-e29b-41d4-a716-446655440000 --firestore-project your-project-id --firestore-database database-id
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Debug leveret",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            "program": "${workspaceFolder}",
-            "args": ["new", "-i", "testdata/alert.json"],
-            "env": {
-                "GOOGLE_CLOUD_PROJECT": "your-project-id"
-            }
-        }
-    ]
+  "ID": "550e8400-e29b-41d4-a716-446655440000",
+  "Title": "GuardDuty Alert",
+  "Description": "...",
+  "Data": { ... },
+  "Attributes": [...],
+  "CreatedAt": "2025-10-18T10:30:00Z",
+  "ResolvedAt": null,
+  "Conclusion": "",
+  "Note": "",
+  "MergedTo": ""
 }
 ```
 
-この設定により、F5キーを押すだけでデバッグ実行が開始されます。ブレークポイントを設定して変数の値を確認したり、ステップ実行で処理の流れを追ったりすることができます。
+このコマンドは、アラートIDを指定して単一のアラートを取得し、全フィールドを整形されたJSONで出力します。デバッグやアラートの詳細確認に利用できます。
 
-### ログ出力によるデバッグ
+# 参考: 環境変数管理ツール `zenv`
 
-より手軽なデバッグ方法として、ログ出力を活用することもできます。標準的な `log` パッケージや構造化ログライブラリ（例: [slog](https://pkg.go.dev/log/slog)）を使用してデバッグ情報を出力することで、実行時の状態を確認できます。
+コマンド実行のたびに `--firestore-project` や `--storage-bucket` といったオプションを指定するのは面倒です。`leveret` の各コマンドは環境変数経由でも設定を受け取れるため、事前に設定しておくと便利です。
 
-```go
-import "log/slog"
+ただし、シェルの起動スクリプト（`.bashrc` や `.zshrc`）に環境変数を書き込むと、他のプロジェクトの環境変数と混ざってしまったり、このプロジェクト以外で使わない設定が常に読み込まれてしまいます。プロジェクトごとに環境変数を管理したい場合、筆者が実装している [zenv](https://github.com/m-mizutani/zenv) というツールが便利です。
 
-func (uc *UseCase) CreateAlert(ctx context.Context, data []byte) error {
-    slog.Info("creating alert", "data_size", len(data))
-    // ...
-}
-```
-
-構造化ログを使うことで、後からログを解析しやすくなり、本番環境でのトラブルシューティングにも役立ちます。
-
-### テストの実行
-
-開発中はユニットテストを実行してコードの動作を確認することも重要です。Goの標準テストツールを使って、以下のようにテストを実行できます。
+## インストール
 
 ```bash
-$ go test ./...
+go install github.com/m-mizutani/zenv/v2@latest
 ```
 
-このコマンドはプロジェクト内の全パッケージのテストを実行します。特定のパッケージのみテストしたい場合は、パッケージのパスを指定します。
+## 使い方
+
+プロジェクトルートに `.env.yaml` を作成し、以下のように設定を記述します。
+
+```yaml:.env.yaml
+LEVERET_VERBOSE: 1 # エラー発生時にスタックトレースを表示するようにします
+
+LEVERET_FIRESTORE_PROJECT: your-project-id
+LEVERET_FIRESTORE_DATABASE_ID: leveret-dev
+
+LEVERET_STORAGE_BUCKET: your-bucket-name
+LEVERET_STORAGE_PREFIX: leveret-dev/
+
+LEVERET_GEMINI_PROJECT: your-project-id
+```
+
+コマンド実行時に `zenv` を前置することで、これらの環境変数が自動的に読み込まれます。
 
 ```bash
-$ go test ./pkg/usecase
+$ zenv | grep LEVERET | sort
+LEVERET_FIRESTORE_DATABASE_ID=leveret-dev [.yaml]
+LEVERET_FIRESTORE_PROJECT=your-project-id [.yaml]
+LEVERET_GEMINI_PROJECT=your-project-id [.yaml]
+LEVERET_STORAGE_BUCKET=your-bucket-name [.yaml]
+LEVERET_STORAGE_PREFIX=leveret-dev/ [.yaml]
+LEVERET_VERBOSE=1 [.yaml]
 ```
-
-テストの詳細な出力が必要な場合は、`-v`オプションを付けることで、各テストケースの実行結果を確認できます。
 
 ```bash
-$ go test -v ./...
+$ zenv go run . new -i alert.json
+Alert created: 550e8400-e29b-41d4-a716-446655440000
 ```
+
+これで毎回長いオプションを指定する必要がなくなります。
 
 # まとめ
 
-今回は開発環境のセットアップとプロジェクト構造の理解を進めました。以下の準備が整いました。
+ここまでで、Go開発環境とGoogle Cloud（Firestore、Cloud Storage、Vertex AI）の設定、そして `leveret` プロジェクトの取得と構造理解まで進めました。Google Cloudの設定項目は多いですが、一度設定してしまえばあとは開発に集中できます。
 
-- Go開発環境のセットアップ
-- Google Cloud（Firestore、Cloud Storage、Vertex AI）の設定
-- `leveret` プロジェクトの取得と構造理解
-
-`init` ブランチには最小限の骨組みが用意されています。明日以降、この骨組みに機能を追加していきます。まずはGemini APIとの統合から始め、アラート要約機能を実装します。
-
-開発環境が整ったので、次回からは実際にコードを書いていきましょう。LLMとの対話、ツール呼び出し、ポリシー処理など、エージェントの中核機能を段階的に実装していきます。
-
+次回からはコードを書いていきます。最初はシンプルなアラート要約から始めて、対話的な分析、ツール呼び出し、ポリシー処理と、徐々にエージェントらしい機能を積み上げていきます。
