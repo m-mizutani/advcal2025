@@ -84,8 +84,8 @@ articles:
     notes: "published: true となっており全セクション記述完了"
 
   - day: 7
-    slug: sec-agent-07-prompt-tuning
-    title: プロンプトチューニングの基礎
+    slug: sec-agent-07-conversation-history
+    title: 会話履歴の管理基盤
     scheduled_date: 2025-12-07
     scheduled_time: "09:00"
     writing_deadline: 2025-10-28
@@ -96,8 +96,8 @@ articles:
     notes: "headingのみで本文未記述"
 
   - day: 8
-    slug: sec-agent-08-conversation-history
-    title: 会話履歴の管理基盤
+    slug: sec-agent-08-prompt-tuning
+    title: プロンプトチューニングの基礎
     scheduled_date: 2025-12-08
     scheduled_time: "09:00"
     writing_deadline: 2025-10-31

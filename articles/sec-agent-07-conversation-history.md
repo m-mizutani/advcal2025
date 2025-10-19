@@ -6,7 +6,7 @@ topics: ["LLM", "SQLite", "database", "conversation"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の8日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の7日目です。
 
 # 会話履歴のデータ構造設計
 
