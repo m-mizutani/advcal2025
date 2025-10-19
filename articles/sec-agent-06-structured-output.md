@@ -2,8 +2,8 @@
 title: "構造化データ出力でIoCなど属性値を抽出する"
 emoji: "📊"
 type: "tech"
-topics: ["LLM", "security", "IoC", "StructuredOutput"]
-published: false
+topics: ["LLM", "security", "IoC"]
+published: true
 ---
 
 この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の6日目です。今回は生成AIにテキストを作成させる際、構造化データ（主にJSON形式）を出力させる方法について解説します。今回のコードは https://github.com/m-mizutani/leveret の [day06-structured-output](https://github.com/m-mizutani/leveret/tree/day06-structured-output) ブランチに格納されていますので適宜参照してください。
