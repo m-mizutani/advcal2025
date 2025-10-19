@@ -61,15 +61,15 @@ articles:
 
   - day: 5
     slug: sec-agent-05-llm-basics
-    title: LLM統合の第一歩 - アラート要約
+    title: 生成AI利用の基礎とアラートの説明文の作成
     scheduled_date: 2025-12-05
     scheduled_time: "09:00"
     writing_deadline: 2025-10-22
     publication_deadline: 2025-12-04
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "セクション見出しのみで本文未記述、published: false"
+    status: completed
+    progress: 100
+    completed_date: 2025-10-19
+    notes: "published: true となっており全セクション記述完了、レビュー対応済み"
 
   - day: 6
     slug: sec-agent-06-structured-output
