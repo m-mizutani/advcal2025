@@ -1,8 +1,8 @@
 ---
-title: "構造化データ出力でIOCなど属性値を抽出する"
+title: "構造化データ出力でIoCなど属性値を抽出する"
 emoji: "📊"
 type: "tech"
-topics: ["LLM", "security", "IOC", "StructuredOutput"]
+topics: ["LLM", "security", "IoC", "StructuredOutput"]
 published: false
 ---
 
@@ -95,7 +95,9 @@ Generate a JSON response with a short title and detailed description for this se
 Return the response as JSON with "title" and "description" fields.
 ```
 
-スキーマとプロンプトの準備ができたら、先ほど定義した `config` を指定して生成AIへプロンプトを投げます。返り値はあくまでテキスト形式のJSON文字列なので、`json.Unmarshal` で構造体に復元します。前回同様、バリデーションに失敗した場合はリトライを行います。`validate()` でエラーが出た場合はそのエラーメッセージを `FailedExamples` に追加し、最大3回までリトライします。リトライ時は失敗理由を含めたプロンプトを再生成して送信することで、生成AIが前回の失敗から学習できるようにします。
+このプロンプトは3つのセクションで構成されています。`Requirements` セクションでは出力データの制約を明示し、`Alert data` セクションでは分析対象のアラート情報を渡します。`Previous attempts failed` セクションはリトライ時にのみ表示され、前回失敗した理由を生成AIにフィードバックします。
+
+スキーマとプロンプトの準備ができたら、先ほど定義した `config` を指定して生成AIへプロンプトを送信します。返り値はあくまでテキスト形式のJSON文字列なので、`json.Unmarshal` で構造体に復元します。前回同様、バリデーションに失敗した場合はリトライを行います。以下のコードは最大3回までリトライするループ内に配置されます。`validate()` でエラーが出た場合はそのエラーメッセージを `FailedExamples` に追加し、プロンプトを再生成して送信することで、生成AIが前回の失敗から学習できるようにします。
 
 ```go
 resp, err := gemini.GenerateContent(ctx, contents, config)
@@ -123,7 +125,7 @@ if err := summary.validate(); err != nil {
 }
 ```
 
-実際に実行してみると、一度のリクエストでtitleとdescriptionの両方が取得できていることがわかります。今回は生成AIから返されたJSON文字列がどのような形式になっているか確認するため、デバッグ用の `Printf` で出力しています。
+実際に実行してみると、一度のリクエストでtitleとdescriptionの両方が取得できていることがわかります。前回は2回のAPI呼び出しが必要でしたが、構造化出力を使うことで1回の呼び出しで完結します。今回は生成AIから返されたJSON文字列がどのような形式になっているか確認するため、デバッグ用の `Printf` で出力しています。
 
 ```shell
 $ go run . new -i examples/alert/guardduty.json
@@ -145,17 +147,28 @@ IoCを抽出することで、単一のアラートだけでなく組織全体�
 
 ## なぜ抽出するか
 
-アラートが構造化データであれば、IoC情報はその中に含まれているため、そのまま取り出せばよいと考えるかもしれません。しかし実際のセキュリティ運用では、数百種類ものアラートが存在し、それぞれ異なるスキーマを持っています。全てのアラートスキーマを管理し、個別に抽出ロジックを実装するのは現実的ではありません。
+アラートが構造化データであれば、IoC情報はその中に含まれているため、構造データのパスなどを指定してそのまま取り出せばよいと考えるかもしれません。しかし実際のセキュリティ運用では、数百種類ものアラートが存在し、それぞれ異なるスキーマを持っています。全てのアラートスキーマを管理し、個別に抽出ロジックを実装するのは現実的ではありません。
 
-決定性が求められるものや特に重要なものは自前で抽出ロジックを書くべきですが、「ざっくりとIoC情報を抽出したい」というタスクには生成AIが適しています。生成AIはアラートの内容を理解し、柔軟にIoC情報を識別できるため、スキーマの多様性に対応しやすくなります。
+決定性が求められるものや特に重要なものは自前で抽出ロジックを書くべきですが、「大まかにIoC情報を抽出したい」というタスクには生成AIが適しています。生成AIはアラートの内容を理解し、柔軟にIoC情報を識別できるため、スキーマの多様性に対応しやすくなります。
 
 ## 実装
 
 ### Attributeの設計
 
-まずIoC情報やその他の属性情報を格納するための構造体を定義します。`Attribute` 構造体は `Key`、`Value`、`Type` の3つのフィールドを持ちます。`Type` はIPアドレス、ドメイン、ハッシュなどの属性の種類を表します。この構造体もスキーマである程度制約できますが、生成AI以外の入力経路でも後日使用するため、`Validate` メソッドを用意しておきます。
+まずIoC情報やその他の属性情報を格納するための構造体を定義します。`Attribute` 構造体は `Key`、`Value`、`Type` の3つのフィールドを持ちます。`Type` は事前に定義された `AttributeType` 型で、IPアドレス、ドメイン、ハッシュなどの属性の種類を表します。この構造体もスキーマである程度制約できますが、生成AI以外の入力経路でも後日使用するため、`Validate` メソッドを用意しておきます。
 
 ```go:pkg/model/alert.go
+type AttributeType string
+
+const (
+	AttributeTypeString    AttributeType = "string"
+	AttributeTypeNumber    AttributeType = "number"
+	AttributeTypeIPAddress AttributeType = "ip_address"
+	AttributeTypeDomain    AttributeType = "domain"
+	AttributeTypeHash      AttributeType = "hash"
+	AttributeTypeURL       AttributeType = "url"
+)
+
 type Attribute struct {
 	Key   string        `json:"key"`
 	Value string        `json:"value"`
@@ -171,7 +184,7 @@ func (a *Attribute) Validate() error {
 		return goerr.New("attribute value is empty")
 	}
 	switch a.Type {
-	case AttributeTypeNumber, AttributeTypeIPAddress, AttributeTypeDomain, AttributeTypeHash, AttributeTypeURL:
+	case AttributeTypeNumber, AttributeTypeIPAddress, AttributeTypeDomain, AttributeTypeHash, AttributeTypeURL, AttributeTypeString:
 		return nil
 	default:
 		return goerr.New("invalid attribute type", goerr.V("type", a.Type))
@@ -179,7 +192,7 @@ func (a *Attribute) Validate() error {
 }
 ```
 
-次に、前回定義した `alertSummary` 構造体に `Attributes` フィールドを追加します。
+次に、前回定義した `alertSummary` 構造体に `Attributes` フィールドを追加します。また、`Attributes` のバリデーションも追加しておきます。
 
 ```go:pkg/usecase/insert.go
 type alertSummary struct {
@@ -187,11 +200,29 @@ type alertSummary struct {
 	Description string             `json:"description"`
 	Attributes  []*model.Attribute `json:"attributes"`
 }
+
+func (s *alertSummary) validate() error {
+	if len(s.Title) > maxTitleLength {
+		return goerr.New("title too long", goerr.V("title", s.Title), goerr.V("length", len(s.Title)), goerr.V("maxLength", maxTitleLength))
+	}
+	if s.Title == "" {
+		return goerr.New("title is empty")
+	}
+	if s.Description == "" {
+		return goerr.New("description is empty")
+	}
+	for _, attr := range s.Attributes {
+		if err := attr.Validate(); err != nil {
+			return goerr.Wrap(err, "invalid attribute")
+		}
+	}
+	return nil
+}
 ```
 
 ### Response Schemaの更新
 
-構造体の定義ができたら、Response Schemaを更新します。先ほどの `title` と `description` に加えて、`attributes` という配列とその中身のスキーマを定義します。今回はわかりやすさのため `config` 内に直接記述していますが、メンテナンス性を考えるとmodel層にスキーマ定義やスキーマ生成コードを持たせる設計も考えられます。
+構造体の定義ができたら、Response Schemaを更新します。先ほどの `title` と `description` に加えて、`attributes` という配列とその中身のスキーマを定義します。今回はわかりやすさのため `config` 内に直接記述していますが、メンテナンス性を考慮する場合は別の設計も考えられます。たとえば、`Attribute` 構造体から自動的にスキーマを生成する関数を model 層に用意すれば、構造体定義とスキーマ定義の二重管理を避けられます。
 
 スキーマでは `key`、`value`、`type` の各フィールドについて詳しい説明を追加しています。特に `type` フィールドは `Enum` で `"number"`、`"ip_address"`、`"domain"`、`"hash"`、`"url"`、`"string"` の6種類に制約しています。
 
@@ -239,7 +270,7 @@ type alertSummary struct {
 		}
 ```
 
-### データの抽出とバリデーション
+### データの抽出、バリデーション、格納
 
 スキーマを定義したら、生成AIから返されたJSONを構造体にアンマーシャルし、バリデーションを実行します。今回は構造化データの内容を確認しやすくするため、Pretty Printを行っています。
 
@@ -261,7 +292,7 @@ type alertSummary struct {
 		}
 ```
 
-最後に、`generateSummary` の呼び出し後、取得したデータを `alert` 構造体に格納します。`Title` と `Description` に加えて、今回新たに追加した `Attributes` も保存します。
+バリデーションが成功したら、`generateSummary` の呼び出し後、取得したデータを `alert` 構造体に格納します。`Title` と `Description` に加えて、今回新たに追加した `Attributes` も保存します。
 
 ```go
 	summary, err := generateSummary(ctx, u.gemini, string(jsonData))
@@ -308,7 +339,23 @@ parsed summary JSON: {
       "value": "198.51.100.0",
       "type": "ip_address"
     },
-    # 以下略
+    {
+      "key": "instance_private_ip",
+      "value": "192.168.0.1",
+      "type": "ip_address"
+    },
+    {
+      "key": "severity_score",
+      "value": "8",
+      "type": "number"
+    },
+    {
+      "key": "finding_type",
+      "value": "Trojan:EC2/DropPoint!DNS",
+      "type": "string"
+    }
+  ]
+}
 ```
 
 このように、生成AIは `attributes` 配列に複数のIoC情報と重要な属性を抽出してくれます。`detected_domain` は `domain` 型として、`instance_public_ip` は `ip_address` 型として正しく分類されています。また、AWSアカウントIDやリージョンといった調査に必要な情報も併せて抽出されています。
