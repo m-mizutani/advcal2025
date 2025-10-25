@@ -33,7 +33,7 @@ graph LR
     Alert -->|new| Agent
     User <-->|chat| Agent
     Agent <-->|分析依頼| Gemini
-    Gemini <-->|Tool Call| Agent
+    Gemini <-->|Function Calling| Agent
     Agent -->|ツール実行| Tools
     Agent <-->|保存/検索| DB
     User -->|list/merge| Agent
@@ -327,7 +327,7 @@ sequenceDiagram
     App->>LLM: ① プロンプト + ツール一覧
 
     rect rgb(240, 240, 255)
-        Note over App,Tool: Tool Call ループ（繰り返し）
+        Note over App,Tool: Function Calling ループ（繰り返し）
         LLM->>App: ② ToolCall指示<br/>(AlienVault OTX APIを呼んで)
         App->>Tool: ③ ツール実行
         Tool->>App: ④ 結果
@@ -345,11 +345,11 @@ sequenceDiagram
     App->>User: 分析結果
 ```
 
-最もシンプルな生成AI呼び出しは単純なテキスト生成リクエスト（content generate）です。しかしこれだと単発の呼び出しで完結してしまい、外部ツールとの連携ができません。そこで本エージェントでは**Tool Call**と呼ばれる呼び出し方法を使います。
+最もシンプルな生成AI呼び出しは単純なテキスト生成リクエスト（content generate）です。しかしこれだと単発の呼び出しで完結してしまい、外部ツールとの連携ができません。そこで本エージェントでは**Function Calling**と呼ばれる呼び出し方法を使います。
 
-Tool Callは生成AIにツール一覧と指示を渡して、その応答に呼び出すツールの指定を含ませる仕組みです。OpenAI APIでは"Function Calling"、Anthropic APIでは"Tool Use"と呼ばれています。生成AIから**ToolCall**（呼び出し指示）が返ってきたら、それに合わせて実際のツール（外部機能）を呼び出します。その結果を**ToolResult**（実行結果）としてまた生成AIに渡します。
+Function Callingは生成AIにツール一覧と指示を渡して、その応答に呼び出すツールの指定を含ませる仕組みです。OpenAI APIでは"Function Calling"、Anthropic APIでは"Tool Use"と呼ばれています。生成AIから**FunctionCall**（呼び出し指示）が返ってきたら、それに合わせて実際のツール（外部機能）を呼び出します。その結果を**FunctionResult**（実行結果）としてまた生成AIに渡します。
 
-この処理はToolCallが発生しなくなるまで繰り返されます。ToolCallが返ってこなくなったら、生成AIは最終的な結論を返します。このワークフローには様々な発展形がありますが、これが最もシンプルな構成です。後続の記事ではこれをベースに説明していきます。
+この処理はFunctionCallが発生しなくなるまで繰り返されます。FunctionCallが返ってこなくなったら、生成AIは最終的な結論を返します。このワークフローには様々な発展形がありますが、これが最もシンプルな構成です。後続の記事ではこれをベースに説明していきます。
 
 ## アラートのライフサイクル
 
@@ -378,7 +378,7 @@ stateDiagram-v2
     end note
 
     note right of 分析中
-        Tool Callループで
+        Function Callingループで
         外部ツールを活用し
         情報収集
     end note
@@ -404,7 +404,7 @@ stateDiagram-v2
 
 ### アラートの分析（`chat`コマンド）
 
-分析を行う際は `chat` コマンドでIDを指定して対話的な分析を開始します。前節で説明したTool Callのループによって、必要な外部ツールを呼び出しながら分析を進めます。会話履歴はCloud Storageに保存されるため、次回の `chat` コマンド実行時に分析を継続することができます。
+分析を行う際は `chat` コマンドでIDを指定して対話的な分析を開始します。前節で説明したFunction Callingのループによって、必要な外部ツールを呼び出しながら分析を進めます。会話履歴はCloud Storageに保存されるため、次回の `chat` コマンド実行時に分析を継続することができます。
 
 分析の際には、Firestoreから類似アラートをベクトル検索で取得し、過去の対応事例をコンテキストとして活用します。これにより、過去に似たようなアラートがあった場合にその対応履歴を参照しながら分析を進めることができます。
 
