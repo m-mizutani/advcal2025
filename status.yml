@@ -96,8 +96,8 @@ articles:
     notes: "published: true となっており全セクション記述完了、レビュー対応済み"
 
   - day: 8
-    slug: sec-agent-08-prompt-tuning
-    title: プロンプトチューニングの基礎
+    slug: sec-agent-08-function-calling
+    title: Function Callingによる外部ツール連携
     scheduled_date: 2025-12-08
     scheduled_time: "09:00"
     writing_deadline: 2025-10-31
@@ -108,8 +108,8 @@ articles:
     notes: "headingのみで本文未記述"
 
   - day: 9
-    slug: sec-agent-09-function-calling
-    title: Function Callingで外部ツールと連携
+    slug: sec-agent-09-threat-intel
+    title: 脅威インテリジェンスツールの実装
     scheduled_date: 2025-12-09
     scheduled_time: "09:00"
     writing_deadline: 2025-11-03
@@ -120,8 +120,8 @@ articles:
     notes: "headingのみで本文未記述"
 
   - day: 10
-    slug: sec-agent-10-threat-intel
-    title: 脅威インテリジェンスツールの実装
+    slug: sec-agent-10-mcp
+    title: MCPで拡張可能なツール基盤
     scheduled_date: 2025-12-10
     scheduled_time: "09:00"
     writing_deadline: 2025-11-06
@@ -132,8 +132,8 @@ articles:
     notes: "headingのみで本文未記述"
 
   - day: 11
-    slug: sec-agent-11-mcp
-    title: MCPで拡張可能なツール基盤
+    slug: sec-agent-11-prompt-tuning
+    title: プロンプトチューニングの基礎
     scheduled_date: 2025-12-11
     scheduled_time: "09:00"
     writing_deadline: 2025-11-09
