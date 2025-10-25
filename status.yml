@@ -85,15 +85,15 @@ articles:
 
   - day: 7
     slug: sec-agent-07-conversation-history
-    title: 会話履歴の管理基盤
+    title: 会話と履歴の管理
     scheduled_date: 2025-12-07
     scheduled_time: "09:00"
     writing_deadline: 2025-10-28
     publication_deadline: 2025-12-06
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "headingのみで本文未記述"
+    status: completed
+    progress: 100
+    completed_date: 2025-10-25
+    notes: "published: true となっており全セクション記述完了、レビュー対応済み"
 
   - day: 8
     slug: sec-agent-08-prompt-tuning
