@@ -473,7 +473,7 @@ func (s *Session) Send(ctx context.Context, message string) (*genai.GenerateCont
 このように、会話の最初の入力からタイトルを自動生成してセットします。
 
 ```bash
-$ go run . chat -i ea6cb2ef-5ba2-4243-87bf-5bf8d6217981                  13.5s  Sat Oct 25 12:08:31 2025
+$ go run . chat -i ea6cb2ef-5ba2-4243-87bf-5bf8d6217981
 
 Chat session started. Type 'exit' to quit.
 
