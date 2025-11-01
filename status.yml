@@ -114,10 +114,10 @@ articles:
     scheduled_time: "09:00"
     writing_deadline: 2025-11-03
     publication_deadline: 2025-12-08
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "headingのみで本文未記述"
+    status: completed
+    progress: 100
+    completed_date: 2025-11-01
+    notes: "published: true となっており全セクション記述完了、レビュー対応済み"
 
   - day: 10
     slug: sec-agent-10-mcp
