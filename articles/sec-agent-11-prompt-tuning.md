@@ -1,5 +1,5 @@
 ---
-title: "MCPで拡張可能なツール基盤"
+title: "プロンプトチューニングの基礎"
 emoji: "🔌"
 type: "tech"
 topics: ["MCP", "ModelContextProtocol", "LLM", "tools"]

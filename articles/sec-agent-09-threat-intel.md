@@ -1,5 +1,5 @@
 ---
-title: "Function Callingで外部ツールと連携"
+title: "脅威インテリジェンスツールの実装"
 emoji: "🔧"
 type: "tech"
 topics: ["LLM", "FunctionCalling", "API", "tools"]

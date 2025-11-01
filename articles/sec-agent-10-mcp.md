@@ -1,5 +1,5 @@
 ---
-title: "脅威インテリジェンスツールの実装"
+title: "MCPによるツール利用の拡張"
 emoji: "🛡️"
 type: "tech"
 topics: ["security", "ThreatIntelligence", "API", "integration"]
