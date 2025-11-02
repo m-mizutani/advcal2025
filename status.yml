@@ -121,15 +121,15 @@ articles:
 
   - day: 10
     slug: sec-agent-10-mcp
-    title: MCPで拡張可能なツール基盤
+    title: MCPによるツール利用の拡張
     scheduled_date: 2025-12-10
     scheduled_time: "09:00"
     writing_deadline: 2025-11-06
     publication_deadline: 2025-12-09
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "headingのみで本文未記述"
+    status: completed
+    progress: 100
+    completed_date: 2025-11-02
+    notes: "published: true となっており全セクション記述完了、レビュー対応済み"
 
   - day: 11
     slug: sec-agent-11-prompt-tuning

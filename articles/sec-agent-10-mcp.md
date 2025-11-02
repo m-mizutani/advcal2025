@@ -3,7 +3,7 @@ title: "MCPによるツール利用の拡張"
 emoji: "🛡️"
 type: "tech"
 topics: ["security", "ThreatIntelligence", "API", "integration"]
-published: false
+published: true
 ---
 
 この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の10日目です。今回はModel Context Protocol (MCP)を使ってツール呼び出し機能を別プロセスや別サービスへ移譲する方法について解説します。
