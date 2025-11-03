@@ -2,11 +2,11 @@
 title: "大量データの圧縮技術"
 emoji: "🗜️"
 type: "tech"
-topics: ["LLM", "data", "compression", "optimization"]
+topics: ["LLM", "DataCompaction", "MapReduce", "Agent"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の13日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の12日目です。
 
 # 入力データcompactionの必要性
 
@@ -21,3 +21,5 @@ published: false
 # 階層的要約：詳細→要約→超要約
 
 # LLMコンテキストに収まるサイズへの圧縮
+
+# まとめ

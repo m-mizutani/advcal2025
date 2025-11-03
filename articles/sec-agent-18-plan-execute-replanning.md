@@ -2,11 +2,11 @@
 title: "Plan & Execute (3) - 動的再計画"
 emoji: "🔄"
 type: "tech"
-topics: ["LLM", "agent", "PlanExecute", "replanning"]
+topics: ["Agent", "PlanExecute", "Replanning", "Recovery"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の20日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の18日目です。
 
 # 実行結果の評価方法
 
@@ -21,3 +21,5 @@ published: false
 # 終了条件の設計と制御
 
 # デバッグとトラブルシューティング
+
+# まとめ

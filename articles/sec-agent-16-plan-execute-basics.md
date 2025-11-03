@@ -1,12 +1,12 @@
 ---
 title: "Plan & Execute (1) - 基礎概念"
-emoji: "📝"
+emoji: "📋"
 type: "tech"
-topics: ["LLM", "agent", "PlanExecute", "pattern"]
+topics: ["Agent", "PlanExecute", "ReAct", "LLM"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の18日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の16日目です。
 
 # Plan & Executeパターンとは
 
@@ -21,3 +21,5 @@ published: false
 # 各ステップの実行と結果記録
 
 # 全体像の理解と動作確認
+
+# まとめ

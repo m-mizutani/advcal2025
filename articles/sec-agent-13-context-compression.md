@@ -1,12 +1,12 @@
 ---
 title: "会話コンテキストの圧縮戦略"
-emoji: "📦"
+emoji: "💬"
 type: "tech"
-topics: ["LLM", "context", "compression", "embedding"]
+topics: ["LLM", "ContextCompression", "ConversationHistory", "Agent"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の14日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の13日目です。
 
 # トークン制限の課題
 
@@ -16,8 +16,8 @@ published: false
 
 # セマンティック選択：関連性の高いメッセージだけ残す
 
-# Embeddingを使った類似度ベース選択
-
 # 圧縮レベルの動的調整
 
 # 圧縮による情報損失のトレードオフ
+
+# まとめ
