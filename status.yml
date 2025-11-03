@@ -109,7 +109,7 @@ articles:
 
   - day: 9
     slug: sec-agent-09-threat-intel
-    title: 脅威インテリジェンスツールの実装
+    title: シンプルなツールの実装：脅威インテリジェンスツール
     scheduled_date: 2025-12-09
     scheduled_time: "09:00"
     writing_deadline: 2025-11-03
@@ -133,7 +133,7 @@ articles:
 
   - day: 11
     slug: sec-agent-11-log-db
-    title: ログDBアクセスツールの実装
+    title: 複雑なツールの実装：ログDBアクセスツール
     scheduled_date: 2025-12-11
     scheduled_time: "09:00"
     writing_deadline: 2025-11-09
