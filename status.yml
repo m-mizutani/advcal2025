@@ -132,8 +132,8 @@ articles:
     notes: "published: true となっており全セクション記述完了、レビュー対応済み"
 
   - day: 11
-    slug: sec-agent-11-prompt-tuning
-    title: プロンプトチューニングの基礎
+    slug: sec-agent-11-log-db
+    title: ログDBアクセスツールの実装
     scheduled_date: 2025-12-11
     scheduled_time: "09:00"
     writing_deadline: 2025-11-09
@@ -141,11 +141,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "構成変更: 旧Day12から変更。headingのみで本文未記述"
 
   - day: 12
-    slug: sec-agent-12-log-db
-    title: ログDBアクセスとコンテキストエンジニアリング
+    slug: sec-agent-12-data-compaction
+    title: 大量データの圧縮技術
     scheduled_date: 2025-12-12
     scheduled_time: "09:00"
     writing_deadline: 2025-11-12
@@ -153,11 +153,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "構成変更: 旧Day13から変更。headingのみで本文未記述"
 
   - day: 13
-    slug: sec-agent-13-data-compaction
-    title: 大量データの圧縮技術
+    slug: sec-agent-13-context-compression
+    title: 会話コンテキストの圧縮戦略
     scheduled_date: 2025-12-13
     scheduled_time: "09:00"
     writing_deadline: 2025-11-15
@@ -165,11 +165,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "構成変更: 旧Day14から変更。headingのみで本文未記述"
 
   - day: 14
-    slug: sec-agent-14-context-compression
-    title: 会話コンテキストの圧縮戦略
+    slug: sec-agent-14-subagent
+    title: サブエージェントアーキテクチャ
     scheduled_date: 2025-12-14
     scheduled_time: "09:00"
     writing_deadline: 2025-11-18
@@ -177,11 +177,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "構成変更: 新規トピック。headingのみで本文未記述"
 
   - day: 15
-    slug: sec-agent-15-opa-rego
-    title: Open Policy Agentとrego入門
+    slug: sec-agent-15-policy-driven
+    title: ポリシー駆動アーキテクチャ
     scheduled_date: 2025-12-15
     scheduled_time: "09:00"
     writing_deadline: 2025-11-21
@@ -189,11 +189,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "構成変更: 旧Day15+16統合。OPA/Rego+自動アクション。headingのみで本文未記述"
 
   - day: 16
-    slug: sec-agent-16-action-policy
-    title: ポリシーベースの自動アクション
+    slug: sec-agent-16-plan-execute-basics
+    title: Plan & Execute (1) - 基礎概念
     scheduled_date: 2025-12-16
     scheduled_time: "09:00"
     writing_deadline: 2025-11-24
@@ -201,11 +201,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "構成変更: 旧Day18から変更。headingのみで本文未記述"
 
   - day: 17
-    slug: sec-agent-17-ai-policy-dev
-    title: AI支援によるポリシー開発
+    slug: sec-agent-17-plan-execute-advanced
+    title: Plan & Execute (2) - 複雑な計画立案
     scheduled_date: 2025-12-17
     scheduled_time: "09:00"
     writing_deadline: 2025-11-27
@@ -213,11 +213,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "構成変更: 旧Day19から変更。headingのみで本文未記述"
 
   - day: 18
-    slug: sec-agent-18-plan-execute-basics
-    title: Plan & Execute (1) - 基礎概念
+    slug: sec-agent-18-plan-execute-replanning
+    title: Plan & Execute (3) - 動的再計画
     scheduled_date: 2025-12-18
     scheduled_time: "09:00"
     writing_deadline: 2025-11-30
@@ -225,11 +225,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "構成変更: 旧Day20から変更。headingのみで本文未記述"
 
   - day: 19
-    slug: sec-agent-19-plan-execute-advanced
-    title: Plan & Execute (2) - 複雑な計画立案
+    slug: sec-agent-19-embedding-similarity
+    title: Embeddingによる類似アラート検索
     scheduled_date: 2025-12-19
     scheduled_time: "09:00"
     writing_deadline: 2025-12-03
@@ -237,11 +237,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "構成変更: 旧Day21から変更。headingのみで本文未記述"
 
   - day: 20
-    slug: sec-agent-20-plan-execute-replanning
-    title: Plan & Execute (3) - 動的再計画
+    slug: sec-agent-20-memory-system
+    title: エージェントの記憶システム
     scheduled_date: 2025-12-20
     scheduled_time: "09:00"
     writing_deadline: 2025-12-06
@@ -249,11 +249,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "構成変更: 新規トピック。短期/長期記憶、RAG。headingのみで本文未記述"
 
   - day: 21
-    slug: sec-agent-21-embedding-similarity
-    title: Embeddingによる類似アラート検索
+    slug: sec-agent-21-error-handling
+    title: エラーハンドリングとリカバリー戦略
     scheduled_date: 2025-12-21
     scheduled_time: "09:00"
     writing_deadline: 2025-12-09
@@ -261,7 +261,7 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "構成変更: 新規トピック。リトライ、フォールバック、エスカレーション。headingのみで本文未記述"
 
   - day: 22
     slug: sec-agent-22-testing
