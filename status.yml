@@ -133,15 +133,15 @@ articles:
 
   - day: 11
     slug: sec-agent-11-log-db
-    title: 複雑なツールの実装：ログDBアクセスツール
+    title: より実践的なツールの実装：BigQueryからのログ取得
     scheduled_date: 2025-12-11
     scheduled_time: "09:00"
     writing_deadline: 2025-11-09
     publication_deadline: 2025-12-10
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "構成変更: 旧Day12から変更。headingのみで本文未記述"
+    status: completed
+    progress: 100
+    completed_date: 2025-11-08
+    notes: "published: true となっており全セクション記述完了"
 
   - day: 12
     slug: sec-agent-12-data-compaction
