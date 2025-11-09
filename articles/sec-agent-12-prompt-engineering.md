@@ -10,6 +10,8 @@ published: false
 
 一般的にプロンプトエンジニアリングとは、生成AIに与えるプロンプトを設計・調整・改善する一連の活動を指します。実際、すでにここまで開発をしてきたなかでもいくつかプロンプトエンジニアリングに該当するような調整をしてきています。今回はセキュリティ分析のエージェントを構築するに当たって、改めてどのような観点での調整をしうるのかについて解説します。
 
+今回のコードは https://github.com/m-mizutani/leveret の [day12-prompt-engineering](https://github.com/m-mizutani/leveret/tree/day12-prompt-engineering) ブランチに格納されていますので適宜参照してください。
+
 # 現在のプロンプト
 
 ここまでの実装で利用してきた、エージェントに与える基本のプロンプトが以下になります。
@@ -32,6 +34,8 @@ if s.registry != nil {
 - 実際の運用を考えるともう少し気の利いた処理が必要になる
 
 # 改善しうるポイント
+
+プロンプトエンジニアリングは、生成AIの性能を最大限に引き出すために、プロンプトを体系的に設計・調整する技術です[^prompt-guide]。以下では、セキュリティ分析エージェントのプロンプトを改善するための具体的な観点を解説します。
 
 ## 役割や目的の定義
 
@@ -105,24 +109,60 @@ if s.registry != nil {
 
 ## その他のポイント
 
+### プロンプト改善への生成AIの活用
+
 - プロンプトの改善も生成AIを活用すると良い
+  - 意図を伝えるとよしなに記載をしてくれる
+  - ただしたまに意図とことなる実装になったりする
+  - また過剰に強調表現をつけたりする
+    - 強調表現多すぎるとそれぞれで拾われなくなるので適度に調整が必要
+
+### 英語と日本語の選択
+
+- プロンプトはなるべく英語にするのが望ましいとされている
+  - 英語での学習が中心のため性能が安定するとされている[^english-performance]
+  - 特にChain-of-Thought（CoT）などの高度なプロンプト技法は、英語での方が効果が高い傾向がある
+  - ただし最近のモデル（GPT-4、Gemini、Claude）は日本語でも十分な性能を発揮する
+- 実用上の判断基準
+  - システムプロンプト（役割定義、ルール、ガイドライン）: 英語推奨
+  - 出力言語の指定: 明示的に指定する（例: "Always respond in Japanese"）
+  - ユーザーとのやり取り: ユーザーの言語に合わせる
+  - データやコンテキスト: 元の言語のまま提供
+
+### コンテキストウィンドウ内の情報配置
+
+- 情報の配置位置によって生成AIの認識精度が変わる
+  - 重要な情報はプロンプトの最初か最後に配置する
+  - 中間部分の情報は見落とされやすい（Lost in the Middle）[^lost-in-middle]
+  - 長いコンテキストの場合は特に注意が必要
 
 # 改善案と実装
 
 ## 実装の改善
 
-- プロンプトは（すでにalertの要約やパラメータ抽出でもやったが） `text/template` を使うのがよい
-  - `*.md` 形式で保存しておくとエディタのlinterやスタイルの恩恵を受けられる
-  - テキストの埋め込みや分岐など、だいたいやりたいことはテンプレート制御で実現できる
-  - Goの場合 `embed` を使うことで容易にデータの埋め込みができる
-  - templateのコンパイルだけ `init()` でやっておくと、実際に利用するときにテンプレートのフォーマットが間違っていたというエラーを防ぐことができる
+プロンプトは（すでにalertの要約やパラメータ抽出でもやったが） `text/template` を使うのがよいです。以下のような利点があります。
+
+- `*.md` 形式で保存しておくとエディタのlinterやスタイルの恩恵を受けられる
+- テキストの埋め込みや分岐など、だいたいやりたいことはテンプレート制御で実現できる
+- Goの場合 `embed` を使うことで容易にデータの埋め込みができる
+- templateのコンパイルだけ `init()` 、あるいはグローバルでやっておくと、実際に利用するときにテンプレートのフォーマットが間違っていたというエラーを防ぐことができる
+
+具体的な実装例を以下に示します。
+
+```go:pkg/usecase/chat/session.go
+//go:embed prompt/session.md
+var sessionPromptRaw string
+
+var sessionPromptTmpl = template.Must(template.New("session").Parse(sessionPromptRaw))
+```
+
+この実装により、プロンプトテンプレートをMarkdown形式で管理し、実行時に動的にデータを埋め込むことができます。`init()` 関数でテンプレートをコンパイルしておくことで、テンプレート構文エラーを起動時に検出できます。
 
 ## プロンプトの改善
 
-- 例として以下のような改善ができる
-  - 全文は https://github.com/m-mizutani/leveret/blob/day12-prompt-engineering/pkg/usecase/chat/prompt/session.md をみよ
+ここまで説明してきた改善ポイントを実際のプロンプトに適用した例を紹介します。全文は https://github.com/m-mizutani/leveret/blob/day12-prompt-engineering/pkg/usecase/chat/prompt/session.md を参照してください。
 
-- 役割を明確かと基本的な方針を説明
+### 役割と目的の明確化
 
 ```md
 # Role and Purpose
@@ -132,7 +172,9 @@ You are a security analysis agent specialized in investigating and analyzing sec
 **Important**: While you are a security expert, your primary purpose is to **support the analyst's investigation**, not to make final decisions. Always follow the analyst's instructions and questions carefully. Do not immediately jump to analysis unless explicitly asked.
 ```
 
-- アラートとして与えるデータに関する説明
+このセクションでは、エージェントがセキュリティ分析の専門家であることを明示しつつ、最終的な判断はアナリストに委ねることを強調しています。これにより、不十分な情報で結論を急ぐことを防ぎます。
+
+### データ構造の説明
 
 ```md
 ## Alert Data Structure
@@ -151,7 +193,9 @@ You have access to an alert with the following structure:
 - The `data` field contains the **authoritative source** - always refer to this for detailed investigation
 ```
 
-- 分析に関する方針を明確化
+アラートデータの構造と各フィールドの意味を明確に説明しています。特に `data` フィールドが権威的なソースであることを強調することで、自動生成された要約だけに頼らず、オリジナルデータを参照するよう促しています。
+
+### 分析方針の定義
 
 ```md
 ## Investigation Methodology
@@ -424,3 +468,22 @@ Query validation failed: failed to run dry-run query: googleapi: Error 400: Unre
 ### 結論
 この調査では、提供されたアラート情報に基づいてGoogle Cloudの主要な監査ログ（アクティビティログおよびシステムイベントログ）を分析しましたが、アラートで示唆されている初回アクセスイベントに関する直接的なログエントリを見つけることはできませんでした。この情報の欠如は、攻撃が通常のログ記録メカニズムを回避した可能性、または検出情報が異なるログソースから派生した可能性を示唆しています。このギャップを埋めるためには、他のログソースの調査、検出システムの詳細分析、およびインスタンスのフォレンジック分析が不可欠です。
 :::
+
+# まとめ
+
+プロンプトエンジニアリングは、生成AIエージェントの性能を大きく左右する重要な要素です。本記事で解説した改善ポイントを整理すると以下のようになります。
+
+- **役割と目的の明確化**: エージェントに期待する振る舞いと制約を明示する
+- **背景情報の提供**: 分析に必要な環境やポリシーの情報を注入できるようにする
+- **データ構造の説明**: 各フィールドの意味や重要度を明確に伝える
+- **分析指針の定義**: ツールの使い方や分析手順を具体的に指示する
+- **出力ガイドライン**: 結果の形式や言語、事実と推論の分離を指示する
+- **実装の工夫**: テンプレート機能を活用し、メンテナンス性を確保する
+
+今回示した実装例では、単純な「helpful assistant」から、セキュリティ分析に特化した体系的なプロンプトへと改善しました。この結果、「ログ分析して」という簡潔な指示だけで、エージェントが自律的にスキーマ確認、クエリ実行、結果分析、結論導出まで実施できるようになりました。
+
+プロンプトエンジニアリングは一度で完成するものではなく、実際の運用を通じて継続的に改善していくものです。次回以降は、さらに高度なコンテキスト管理やサブエージェントの活用について解説していきます。
+
+[^prompt-guide]: Prompt Engineering Guide: https://www.promptingguide.ai/
+[^english-performance]: 英語での学習が中心のLLMでは、Zero-shot CoTなどの技法を日本語テキスト処理に適用する際も、"step by step"のような英語フレーズをそのまま使う方が良い結果が得られることが報告されています。ただし最近のモデルは多言語性能が向上しているため、この差は徐々に縮小しています。
+[^lost-in-middle]: Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., & Liang, P. (2023). Lost in the Middle: How Language Models Use Long Contexts. arXiv:2307.03172. https://arxiv.org/abs/2307.03172
