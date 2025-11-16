@@ -174,10 +174,10 @@ articles:
     scheduled_time: "09:00"
     writing_deadline: 2025-11-18
     publication_deadline: 2025-12-13
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "構成変更: 新規トピック。headingのみで本文未記述"
+    status: completed
+    progress: 100
+    completed_date: 2025-11-16
+    notes: "published: true となっており全セクション記述完了、レビュー対応済み"
 
   - day: 15
     slug: sec-agent-15-policy-driven
