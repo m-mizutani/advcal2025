@@ -1,5 +1,5 @@
 ---
-title: "Plan & Execute (3) - 動的再計画"
+title: "Plan & Execute (2) - 動的再計画"
 emoji: "🔄"
 type: "tech"
 topics: ["Agent", "PlanExecute", "Replanning", "Recovery"]
@@ -7,6 +7,8 @@ published: false
 ---
 
 この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の18日目です。
+
+今回のコードは https://github.com/m-mizutani/leveret の [day18-replanning](https://github.com/m-mizutani/leveret/tree/day18-replanning) ブランチに格納されていますので適宜参照してください。
 
 # 実行結果の評価方法
 
@@ -19,6 +21,12 @@ published: false
 # 無限ループの防止：最大反復回数
 
 # 終了条件の設計と制御
+
+# 複雑な計画の生成プロンプト設計
+
+# タスクグラフの構築と実行順序の最適化
+
+# 実行進捗の可視化
 
 # デバッグとトラブルシューティング
 

@@ -1,14 +1,14 @@
 ---
-title: "AIワークフローの実装"
+title: "AIワークフロー (1) - 設計"
 emoji: "📜"
 type: "tech"
-topics: ["OPA", "Policy", "Rego", "Agent"]
+topics: ["Workflow", "SOAR", "AI", "Agent"]
 published: false
 ---
 
 この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の15日目です。
 
-今回のコードは https://github.com/m-mizutani/leveret の [day15-workflow](https://github.com/m-mizutani/leveret/tree/day15-workflow) ブランチに格納されていますので適宜参照してください。
+今回のコードは https://github.com/m-mizutani/leveret の [day15-workflow-design](https://github.com/m-mizutani/leveret/tree/day15-workflow-design) ブランチに格納されていますので適宜参照してください。
 
 # AIワークフローとは
 
