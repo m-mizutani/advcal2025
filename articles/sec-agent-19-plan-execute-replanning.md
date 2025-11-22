@@ -2,7 +2,7 @@
 title: "Plan & Execute (2) - 動的再計画"
 emoji: "🔄"
 type: "tech"
-topics: ["Agent", "PlanExecute", "Replanning", "Recovery"]
+topics: ["ai", "go", "llm", "agent"]
 published: false
 ---
 

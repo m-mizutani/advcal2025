@@ -2,7 +2,7 @@
 title: "エラーハンドリングとリカバリー戦略"
 emoji: "🛡️"
 type: "tech"
-topics: ["Agent", "ErrorHandling", "Recovery", "Resilience"]
+topics: ["ai", "go", "agent"]
 published: false
 ---
 

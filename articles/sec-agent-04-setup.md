@@ -2,7 +2,7 @@
 title: "開発環境の準備と事前実装済みコードの説明"
 emoji: "⚙️"
 type: "tech"
-topics: ["Go", "security", "development", "CLI"]
+topics: ["go", "cli", "docker"]
 published: true
 ---
 

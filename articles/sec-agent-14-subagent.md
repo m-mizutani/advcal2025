@@ -2,7 +2,7 @@
 title: "サブエージェントアーキテクチャ"
 emoji: "🤝"
 type: "tech"
-topics: ["Agent", "SubAgent", "Architecture", "Orchestration"]
+topics: ["ai", "go", "llm", "agent"]
 published: true
 ---
 

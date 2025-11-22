@@ -2,7 +2,7 @@
 title: "AIワークフロー (2) - 実装"
 emoji: "⚙️"
 type: "tech"
-topics: ["Workflow", "YAML", "DSL", "Implementation"]
+topics: ["ai", "go", "agent"]
 published: false
 ---
 

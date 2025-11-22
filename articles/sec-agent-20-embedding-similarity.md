@@ -2,7 +2,7 @@
 title: "Embeddingによる類似アラート検索"
 emoji: "🔍"
 type: "tech"
-topics: ["LLM", "Embedding", "VectorSearch", "Similarity"]
+topics: ["ai", "go", "llm", "rag"]
 published: false
 ---
 

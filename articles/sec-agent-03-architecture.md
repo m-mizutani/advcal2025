@@ -2,7 +2,7 @@
 title: "システムアーキテクチャと設計方針"
 emoji: "🏗️"
 type: "tech"
-topics: ["security", "architecture", "LLM", "design"]
+topics: ["ai", "go", "llm", "agent"]
 published: true
 ---
 

@@ -2,7 +2,7 @@
 title: "WebUIとSlack連携の設計"
 emoji: "🖥️"
 type: "tech"
-topics: ["WebUI", "Slack", "GraphQL", "integration"]
+topics: ["ai", "go", "agent", "api"]
 published: false
 ---
 

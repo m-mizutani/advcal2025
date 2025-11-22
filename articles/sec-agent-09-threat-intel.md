@@ -2,7 +2,7 @@
 title: "シンプルなツールの実装：脅威インテリジェンスツール"
 emoji: "🔧"
 type: "tech"
-topics: ["LLM", "FunctionCalling", "API", "tools"]
+topics: ["ai", "go", "security", "api"]
 published: true
 ---
 

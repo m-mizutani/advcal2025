@@ -2,7 +2,7 @@
 title: "エージェントのプロンプトエンジニアリング"
 emoji: "🗜️"
 type: "tech"
-topics: ["LLM"]
+topics: ["ai", "llm", "prompt"]
 published: true
 ---
 

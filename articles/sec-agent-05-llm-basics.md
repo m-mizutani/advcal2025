@@ -2,7 +2,7 @@
 title: "生成AI利用の基礎とアラートの説明文の作成"
 emoji: "🚀"
 type: "tech"
-topics: ["LLM", "Gemini", "API"]
+topics: ["ai", "go", "llm", "gemini", "api"]
 published: true
 ---
 

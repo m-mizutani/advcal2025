@@ -2,7 +2,7 @@
 title: "MCPによるツール利用の拡張"
 emoji: "🛡️"
 type: "tech"
-topics: ["security", "ThreatIntelligence", "API", "integration"]
+topics: ["ai", "go", "llm", "api"]
 published: true
 ---
 

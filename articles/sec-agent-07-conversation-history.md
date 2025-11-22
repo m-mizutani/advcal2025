@@ -2,7 +2,7 @@
 title: "会話と履歴の管理"
 emoji: "💬"
 type: "tech"
-topics: ["LLM", "SQLite", "database", "conversation"]
+topics: ["ai", "go", "llm"]
 published: true
 ---
 

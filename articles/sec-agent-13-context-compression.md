@@ -2,7 +2,7 @@
 title: "会話コンテキストの圧縮戦略"
 emoji: "💬"
 type: "tech"
-topics: ["LLM", "Agent"]
+topics: ["ai", "go", "llm", "agent"]
 published: true
 ---
 

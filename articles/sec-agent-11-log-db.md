@@ -2,7 +2,7 @@
 title: "より実践的なツールの実装：BigQueryからのログ取得"
 emoji: "🗄️"
 type: "tech"
-topics: ["Go", "LLM", "Database", "SQL", "Agent"]
+topics: ["ai", "go", "llm", "agent"]
 published: true
 ---
 

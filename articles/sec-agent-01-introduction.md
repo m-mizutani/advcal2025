@@ -2,7 +2,7 @@
 title: "はじめに：セキュリティアラート分析と生成AIエージェント"
 emoji: "👋"
 type: "tech"
-topics: ["security", "LLM", "AI", "agent"]
+topics: ["ai", "go", "security", "llm", "agent"]
 published: true
 ---
 

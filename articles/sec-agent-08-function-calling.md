@@ -2,7 +2,7 @@
 title: "Function Callingによる外部ツール連携"
 emoji: "🔧"
 type: "tech"
-topics: ["LLM", "FunctionCalling", "Tool", "Agent"]
+topics: ["ai", "go", "llm", "agent"]
 published: true
 ---
 

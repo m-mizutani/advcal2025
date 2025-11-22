@@ -2,7 +2,7 @@
 title: "構造化データ出力でIoCなど属性値を抽出する"
 emoji: "📊"
 type: "tech"
-topics: ["LLM", "security", "IoC"]
+topics: ["ai", "go", "llm", "json", "security"]
 published: true
 ---
 

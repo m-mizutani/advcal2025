@@ -2,7 +2,7 @@
 title: "AIワークフロー (1) - 設計"
 emoji: "📜"
 type: "tech"
-topics: ["Workflow", "SOAR", "AI", "Agent"]
+topics: ["ai", "go", "agent"]
 published: false
 ---
 

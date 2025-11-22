@@ -2,7 +2,7 @@
 title: "セキュリティアラートの分析業務における課題と生成AIによる改善の可能性"
 emoji: "🚧"
 type: "tech"
-topics: ["security", "SOC", "LLM", "AI"]
+topics: ["ai", "security", "llm"]
 published: true
 ---
 

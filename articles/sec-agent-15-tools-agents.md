@@ -2,7 +2,7 @@
 title: "セキュリティ分析のためのツール・エージェント"
 emoji: "🔧"
 type: "tech"
-topics: ["Security", "LLM", "Go", "SecurityAnalysis"]
+topics: ["ai", "go", "security", "agent"]
 published: false
 ---
 

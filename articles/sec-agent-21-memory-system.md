@@ -2,7 +2,7 @@
 title: "エージェントの記憶システム"
 emoji: "🧠"
 type: "tech"
-topics: ["Agent", "Memory", "RAG", "KnowledgeBase"]
+topics: ["ai", "go", "llm", "rag"]
 published: false
 ---
 

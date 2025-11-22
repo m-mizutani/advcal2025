@@ -2,7 +2,7 @@
 title: "Plan & Execute (1) - 基礎と実装"
 emoji: "📋"
 type: "tech"
-topics: ["Agent", "PlanExecute", "TaskDecomposition", "DAG"]
+topics: ["ai", "go", "llm", "agent"]
 published: false
 ---
 
