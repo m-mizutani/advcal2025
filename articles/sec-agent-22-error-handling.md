@@ -6,7 +6,7 @@ topics: ["Agent", "ErrorHandling", "Recovery", "Resilience"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の21日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の22日目です。
 
 # エージェントの失敗パターン分類
 

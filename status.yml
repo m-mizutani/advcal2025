@@ -180,32 +180,32 @@ articles:
     notes: "published: true となっており全セクション記述完了、レビュー対応済み"
 
   - day: 15
-    slug: sec-agent-15-workflow-design
-    title: AIワークフロー (1) - 設計
+    slug: sec-agent-15-tools-agents
+    title: セキュリティ分析のためのツール・エージェント
     scheduled_date: 2025-12-15
     scheduled_time: "09:00"
     writing_deadline: 2025-11-21
     publication_deadline: 2025-12-14
+    status: not_started
+    progress: 0
+    completed_date: null
+    notes: "新規トピック。ツール、エージェント、ワークフローの違いとセキュリティ分析での活用。headingのみ"
+
+  - day: 16
+    slug: sec-agent-16-workflow-design
+    title: AIワークフロー (1) - 設計
+    scheduled_date: 2025-12-16
+    scheduled_time: "09:00"
+    writing_deadline: 2025-11-24
+    publication_deadline: 2025-12-15
     status: in_progress
     progress: 1
     completed_date: null
     notes: "構成変更: AIワークフロー前半（設計）。SOARとの違い、設計方針など。本文一部記述済み"
 
-  - day: 16
-    slug: sec-agent-16-workflow-implementation
-    title: AIワークフロー (2) - 実装
-    scheduled_date: 2025-12-16
-    scheduled_time: "09:00"
-    writing_deadline: 2025-11-24
-    publication_deadline: 2025-12-15
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "構成変更: AIワークフロー後半（実装）。DSL設計、ランタイム、トリアージフロー実装。headingのみ"
-
   - day: 17
-    slug: sec-agent-17-plan-execute
-    title: Plan & Execute (1) - 基礎と実装
+    slug: sec-agent-17-workflow-implementation
+    title: AIワークフロー (2) - 実装
     scheduled_date: 2025-12-17
     scheduled_time: "09:00"
     writing_deadline: 2025-11-27
@@ -213,11 +213,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "構成変更: 旧16,17統合。Plan&Execute基礎、順次実行、依存関係、DAG。headingのみ"
+    notes: "構成変更: AIワークフロー後半（実装）。DSL設計、ランタイム、トリアージフロー実装。headingのみ"
 
   - day: 18
-    slug: sec-agent-18-plan-execute-replanning
-    title: Plan & Execute (2) - 動的再計画
+    slug: sec-agent-18-plan-execute
+    title: Plan & Execute (1) - 基礎と実装
     scheduled_date: 2025-12-18
     scheduled_time: "09:00"
     writing_deadline: 2025-11-30
@@ -225,11 +225,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "構成変更: 旧17,18統合。リカバリー、再計画、複雑な計画設計、可視化。headingのみ"
+    notes: "構成変更: 旧16,17統合。Plan&Execute基礎、順次実行、依存関係、DAG。headingのみ"
 
   - day: 19
-    slug: sec-agent-19-embedding-similarity
-    title: Embeddingによる類似アラート検索
+    slug: sec-agent-19-plan-execute-replanning
+    title: Plan & Execute (2) - 動的再計画
     scheduled_date: 2025-12-19
     scheduled_time: "09:00"
     writing_deadline: 2025-12-03
@@ -237,11 +237,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "構成変更: 旧Day21から変更。headingのみで本文未記述"
+    notes: "構成変更: 旧17,18統合。リカバリー、再計画、複雑な計画設計、可視化。headingのみ"
 
   - day: 20
-    slug: sec-agent-20-memory-system
-    title: エージェントの記憶システム
+    slug: sec-agent-20-embedding-similarity
+    title: Embeddingによる類似アラート検索
     scheduled_date: 2025-12-20
     scheduled_time: "09:00"
     writing_deadline: 2025-12-06
@@ -249,11 +249,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "構成変更: 新規トピック。短期/長期記憶、RAG。headingのみで本文未記述"
+    notes: "構成変更: 旧Day21から変更。headingのみで本文未記述"
 
   - day: 21
-    slug: sec-agent-21-error-handling
-    title: エラーハンドリングとリカバリー戦略
+    slug: sec-agent-21-memory-system
+    title: エージェントの記憶システム
     scheduled_date: 2025-12-21
     scheduled_time: "09:00"
     writing_deadline: 2025-12-09
@@ -261,11 +261,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "構成変更: 新規トピック。リトライ、フォールバック、エスカレーション。headingのみで本文未記述"
+    notes: "構成変更: 新規トピック。短期/長期記憶、RAG。headingのみで本文未記述"
 
   - day: 22
-    slug: sec-agent-22-testing
-    title: ツールの信頼性を高めるテスト戦略
+    slug: sec-agent-22-error-handling
+    title: エラーハンドリングとリカバリー戦略
     scheduled_date: 2025-12-22
     scheduled_time: "09:00"
     writing_deadline: 2025-12-12
@@ -273,11 +273,11 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "headingのみで本文未記述"
+    notes: "構成変更: 新規トピック。リトライ、フォールバック、エスカレーション。headingのみで本文未記述"
 
   - day: 23
-    slug: sec-agent-23-evaluation
-    title: エージェントの判断精度を測る
+    slug: sec-agent-23-testing
+    title: ツールの信頼性を高めるテスト戦略
     scheduled_date: 2025-12-23
     scheduled_time: "09:00"
     writing_deadline: 2025-12-15

@@ -6,9 +6,9 @@ topics: ["Workflow", "SOAR", "AI", "Agent"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の15日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の16日目です。
 
-今回のコードは https://github.com/m-mizutani/leveret の [day15-workflow-design](https://github.com/m-mizutani/leveret/tree/day15-workflow-design) ブランチに格納されていますので適宜参照してください。
+今回のコードは https://github.com/m-mizutani/leveret の [day16-workflow-design](https://github.com/m-mizutani/leveret/tree/day16-workflow-design) ブランチに格納されていますので適宜参照してください。
 
 # AIワークフローとは
 

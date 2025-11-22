@@ -6,9 +6,9 @@ topics: ["Agent", "PlanExecute", "TaskDecomposition", "DAG"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の17日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の18日目です。
 
-今回のコードは https://github.com/m-mizutani/leveret の [day17-plan-execute](https://github.com/m-mizutani/leveret/tree/day17-plan-execute) ブランチに格納されていますので適宜参照してください。
+今回のコードは https://github.com/m-mizutani/leveret の [day18-plan-execute](https://github.com/m-mizutani/leveret/tree/day18-plan-execute) ブランチに格納されていますので適宜参照してください。
 
 # Plan & Executeパターンとは
 

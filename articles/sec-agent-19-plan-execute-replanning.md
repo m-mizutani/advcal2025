@@ -6,9 +6,9 @@ topics: ["Agent", "PlanExecute", "Replanning", "Recovery"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の18日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の19日目です。
 
-今回のコードは https://github.com/m-mizutani/leveret の [day18-replanning](https://github.com/m-mizutani/leveret/tree/day18-replanning) ブランチに格納されていますので適宜参照してください。
+今回のコードは https://github.com/m-mizutani/leveret の [day19-replanning](https://github.com/m-mizutani/leveret/tree/day19-replanning) ブランチに格納されていますので適宜参照してください。
 
 # 実行結果の評価方法
 
