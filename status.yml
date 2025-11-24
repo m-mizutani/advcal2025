@@ -210,10 +210,10 @@ articles:
     scheduled_time: "09:00"
     writing_deadline: 2025-11-27
     publication_deadline: 2025-12-16
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "構成変更: AIワークフロー後半（実装）。DSL設計、ランタイム、トリアージフロー実装。headingのみ"
+    status: completed
+    progress: 100
+    completed_date: 2025-11-24
+    notes: "published: true となっており全セクション記述完了、レビュー対応済み、OPA/Regoによる3フェーズワークフロー実装"
 
   - day: 18
     slug: sec-agent-18-plan-execute
