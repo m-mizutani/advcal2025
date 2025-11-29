@@ -6,7 +6,7 @@ topics: ["ai", "go", "llm", "agent"]
 published: true
 ---
 
-この記事はアドベントカレンダー「LLMセキュリティエージェントの実装」の13日目です。
+この記事はアドベントカレンダー「セキュリティ分析LLMエージェントの実装」の13日目です。
 
 今回のコードは https://github.com/m-mizutani/leveret の [day13-context-compression](https://github.com/m-mizutani/leveret/tree/day13-context-compression) ブランチに格納されていますので適宜参照してください。
 

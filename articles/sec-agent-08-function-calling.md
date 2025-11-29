@@ -6,7 +6,7 @@ topics: ["ai", "go", "llm", "agent"]
 published: true
 ---
 
-この記事はアドベントカレンダー「LLMセキュリティエージェントの実装」の8日目です。今回は生成AIエージェントがもつ重要な機能の1つである、外部ツール連携についての基礎を説明します。今回のコードは https://github.com/m-mizutani/leveret の [day08-function-calling](https://github.com/m-mizutani/leveret/tree/day08-function-calling) ブランチに格納されていますので適宜参照してください。
+この記事はアドベントカレンダー「セキュリティ分析LLMエージェントの実装」の8日目です。今回は生成AIエージェントがもつ重要な機能の1つである、外部ツール連携についての基礎を説明します。今回のコードは https://github.com/m-mizutani/leveret の [day08-function-calling](https://github.com/m-mizutani/leveret/tree/day08-function-calling) ブランチに格納されていますので適宜参照してください。
 
 # Function Callingとは
 

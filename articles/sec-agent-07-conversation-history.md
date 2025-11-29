@@ -6,7 +6,7 @@ topics: ["ai", "go", "llm"]
 published: true
 ---
 
-この記事はアドベントカレンダー「LLMセキュリティエージェントの実装」の7日目です。今回は生成AIエージェントで実現されている「会話」機能と、その履歴の管理方法について解説します。今回のコードは https://github.com/m-mizutani/leveret の [day07-conversation-history](https://github.com/m-mizutani/leveret/tree/day07-conversation-history) ブランチに格納されていますので適宜参照してください。
+この記事はアドベントカレンダー「セキュリティ分析LLMエージェントの実装」の7日目です。今回は生成AIエージェントで実現されている「会話」機能と、その履歴の管理方法について解説します。今回のコードは https://github.com/m-mizutani/leveret の [day07-conversation-history](https://github.com/m-mizutani/leveret/tree/day07-conversation-history) ブランチに格納されていますので適宜参照してください。
 
 # 生成AIにおける「会話」とは
 
