@@ -6,7 +6,7 @@ topics: ["ai", "go", "llm", "json", "security"]
 published: true
 ---
 
-この記事はアドベントカレンダー「セキュリティ分析LLMエージェントの実装」の6日目です。今回は生成AIにテキストを作成させる際、構造化データ（主にJSON形式）を出力させる方法について解説します。今回のコードは https://github.com/m-mizutani/leveret の [day06-structured-output](https://github.com/m-mizutani/leveret/tree/day06-structured-output) ブランチに格納されていますので適宜参照してください。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析LLMエージェント」の6日目です。今回は生成AIにテキストを作成させる際、構造化データ（主にJSON形式）を出力させる方法について解説します。今回のコードは https://github.com/m-mizutani/leveret の [day06-structured-output](https://github.com/m-mizutani/leveret/tree/day06-structured-output) ブランチに格納されていますので適宜参照してください。
 
 # なぜ構造化データの出力が必要か
 

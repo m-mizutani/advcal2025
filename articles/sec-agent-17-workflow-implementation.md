@@ -6,7 +6,7 @@ topics: ["ai", "go", "agent"]
 published: true
 ---
 
-この記事はアドベントカレンダー「セキュリティ分析LLMエージェントの実装」の17日目です。
+この記事はアドベントカレンダー「Goで作るセキュリティ分析LLMエージェント」の17日目です。
 
 今回のコードは https://github.com/m-mizutani/leveret の [day17-workflow](https://github.com/m-mizutani/leveret/tree/day17-workflow) ブランチに格納されていますので適宜参照してください。
 
