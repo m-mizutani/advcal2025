@@ -6,7 +6,7 @@ topics: ["ai", "go", "llm", "agent"]
 published: true
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の14日目です。本日はメインの生成AIエージェントが複数のサブエージェントを利用する、サブエージェントアーキテクチャについて解説します。
+この記事はアドベントカレンダー「LLMセキュリティエージェントの実装」の14日目です。本日はメインの生成AIエージェントが複数のサブエージェントを利用する、サブエージェントアーキテクチャについて解説します。
 
 今回のコードは https://github.com/m-mizutani/leveret の [day14-sub-agent](https://github.com/m-mizutani/leveret/tree/day14-sub-agent) ブランチに格納されていますので適宜参照してください。
 

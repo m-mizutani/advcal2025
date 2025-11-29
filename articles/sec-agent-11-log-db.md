@@ -6,7 +6,7 @@ topics: ["ai", "go", "llm", "agent"]
 published: true
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の11日目です。ここまではシンプルなAPI問い合わせのツールや外部と接続できるMCP（Model Context Protocol）について解説してきましたが、今回はより実践的かつ複雑なツールの実装をしてみます。題材として、Google CloudのBigQueryからログを検索するツールをとりあげます。
+この記事はアドベントカレンダー「LLMセキュリティエージェントの実装」の11日目です。ここまではシンプルなAPI問い合わせのツールや外部と接続できるMCP（Model Context Protocol）について解説してきましたが、今回はより実践的かつ複雑なツールの実装をしてみます。題材として、Google CloudのBigQueryからログを検索するツールをとりあげます。
 
 今回のコードは https://github.com/m-mizutani/leveret の [day11-db-query-tool](https://github.com/m-mizutani/leveret/tree/day11-db-query-tool) ブランチに格納されていますので適宜参照してください。
 

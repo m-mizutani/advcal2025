@@ -6,7 +6,7 @@ topics: ["ai", "go", "llm", "rag"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析生成AIエージェント」の20日目です。
+この記事はアドベントカレンダー「LLMセキュリティエージェントの実装」の20日目です。
 
 # Embedding APIの利用（Gemini）
 
