@@ -6,7 +6,7 @@ topics: ["ai", "go", "llm", "rag"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析LLMエージェント」の21日目です。
+この記事はアドベントカレンダー「[Goで作るセキュリティ分析LLMエージェント](https://adventar.org/calendars/11354)」の21日目です。
 
 # 短期記憶と長期記憶の概念
 

@@ -6,7 +6,7 @@ topics: ["ai", "go", "llm", "agent"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析LLMエージェント」の19日目です。
+この記事はアドベントカレンダー「[Goで作るセキュリティ分析LLMエージェント](https://adventar.org/calendars/11354)」の19日目です。
 
 今回のコードは https://github.com/m-mizutani/leveret の [day19-plan-execute](https://github.com/m-mizutani/leveret/tree/day19-plan-execute-impl) ブランチに格納されていますので適宜参照してください。
 

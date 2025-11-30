@@ -6,7 +6,7 @@ topics: ["go", "test", "ai"]
 published: false
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析LLMエージェント」の23日目です。
+この記事はアドベントカレンダー「[Goで作るセキュリティ分析LLMエージェント](https://adventar.org/calendars/11354)」の23日目です。
 
 # なぜツールのテストが重要か
 

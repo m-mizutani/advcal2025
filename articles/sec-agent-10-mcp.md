@@ -6,7 +6,7 @@ topics: ["ai", "go", "llm", "api"]
 published: true
 ---
 
-この記事はアドベントカレンダー「Goで作るセキュリティ分析LLMエージェント」の10日目です。今回はModel Context Protocol (MCP)を使ってツール呼び出し機能を別プロセスや別サービスへ移譲する方法について解説します。
+この記事はアドベントカレンダー「[Goで作るセキュリティ分析LLMエージェント](https://adventar.org/calendars/11354)」の10日目です。今回はModel Context Protocol (MCP)を使ってツール呼び出し機能を別プロセスや別サービスへ移譲する方法について解説します。
 
 これまで実装してきたツールは全てエージェントのプロセス内で動作していました。しかし実運用では、ツールを別プロセスとして分離したい場合があります。例えば、特定のツールだけPythonで実装したい場合や、複数のエージェントで同じツールを共有したい場合などです。MCPはこのような要件を標準プロトコルで実現します。
 
@@ -20,7 +20,7 @@ Model Context Protocol (MCP)は、Anthropicが考案したAIアプリケーシ�
 
 [^mcp-official]: Model Context Protocol - https://modelcontextprotocol.io
 
-簡単に言えば、前回までに扱ってきたツール呼び出し(Function Calling)をプロセス外にまで拡張できるようにしたRemote Procedure Call (RPC)の一種です。部分的に生成AI特有の機能(プロンプトやリソースの概念など)はありますが、本質的にはシンプルなRPCプロトコルであり、AI固有の要素は多くありません。
+簡単に言えば、前回までに扱ってきたツール呼び出し(Function Calling)をプロセス外にまで拡張できるようにしたRemote Procedure Call (RPC)の一種です。部分的にLLM特有の機能(プロンプトやリソースの概念など)はありますが、本質的にはシンプルなRPCプロトコルであり、AI固有の要素は多くありません。
 
 ## プロトコルの概要
 
