@@ -216,16 +216,16 @@ articles:
     notes: "published: true となっており全セクション記述完了、レビュー対応済み、OPA/Regoによる3フェーズワークフロー実装"
 
   - day: 18
-    slug: sec-agent-18-plan-execute
-    title: Plan & Execute (1) - 基礎と実装
+    slug: sec-agent-18-plan-execute-design
+    title: エージェント実行の高度な制御 (1) Plan & Execute の概要と設計
     scheduled_date: 2025-12-18
     scheduled_time: "09:00"
     writing_deadline: 2025-11-30
     publication_deadline: 2025-12-17
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "構成変更: 旧16,17統合。Plan&Execute基礎、順次実行、依存関係、DAG。headingのみ"
+    status: completed
+    progress: 100
+    completed_date: 2025-11-30
+    notes: "published: true となっており全セクション記述完了。LLMエージェントの迷走問題とPlan&Execute手法の設計を詳述"
 
   - day: 19
     slug: sec-agent-19-plan-execute-replanning
