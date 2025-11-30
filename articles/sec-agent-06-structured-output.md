@@ -1,5 +1,5 @@
 ---
-title: "構造化データ出力でIoCなど属性値を抽出する"
+title: "Goで作るセキュリティ分析LLMエージェント(6): 構造化データ出力でIoCなど属性値を抽出する"
 emoji: "📊"
 type: "tech"
 topics: ["ai", "go", "llm", "json", "security"]

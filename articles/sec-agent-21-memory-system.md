@@ -1,5 +1,5 @@
 ---
-title: "エージェントの記憶システム"
+title: "Goで作るセキュリティ分析LLMエージェント(21): エージェントの記憶システム"
 emoji: "🧠"
 type: "tech"
 topics: ["ai", "go", "llm", "rag"]

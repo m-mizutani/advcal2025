@@ -1,5 +1,5 @@
 ---
-title: "AIワークフロー (1) - 設計"
+title: "Goで作るセキュリティ分析LLMエージェント(16): AIワークフロー (1) - 設計"
 emoji: "📜"
 type: "tech"
 topics: ["ai", "go", "agent"]

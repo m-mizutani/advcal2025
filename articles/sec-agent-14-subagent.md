@@ -1,5 +1,5 @@
 ---
-title: "サブエージェントアーキテクチャ"
+title: "Goで作るセキュリティ分析LLMエージェント(14): サブエージェントアーキテクチャ"
 emoji: "🤝"
 type: "tech"
 topics: ["ai", "go", "llm", "agent"]

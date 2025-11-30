@@ -1,5 +1,5 @@
 ---
-title: "LLM利用の基礎とアラートの説明文の作成"
+title: "Goで作るセキュリティ分析LLMエージェント(5): LLM利用の基礎とアラートの説明文の作成"
 emoji: "🚀"
 type: "tech"
 topics: ["ai", "go", "llm", "gemini", "api"]

@@ -1,5 +1,5 @@
 ---
-title: "より実践的なツールの実装：BigQueryからのログ取得"
+title: "Goで作るセキュリティ分析LLMエージェント(11): より実践的なツールの実装：BigQueryからのログ取得"
 emoji: "🗄️"
 type: "tech"
 topics: ["ai", "go", "llm", "agent"]

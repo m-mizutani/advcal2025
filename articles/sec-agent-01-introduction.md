@@ -1,5 +1,5 @@
 ---
-title: "セキュリティアラート分析とLLMエージェント"
+title: "Goで作るセキュリティ分析LLMエージェント(1): セキュリティアラート分析とLLMエージェント"
 emoji: "👋"
 type: "tech"
 topics: ["ai", "go", "security", "llm", "agent"]

@@ -1,6 +1,6 @@
 ---
 
-title: "セキュリティ分析のためのツール・サブエージェント"
+title: "Goで作るセキュリティ分析LLMエージェント(15): セキュリティ分析のためのツール・サブエージェント"
 emoji: "🔧"
 type: "tech"
 topics: ["ai", "go", "security", "agent"]

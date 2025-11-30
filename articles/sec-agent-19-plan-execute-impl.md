@@ -1,5 +1,5 @@
 ---
-title: "エージェント実行の高度な制御 (2) Plan & Execute の実装"
+title: "Goで作るセキュリティ分析LLMエージェント(19): エージェント実行の高度な制御 (2) Plan & Execute の実装"
 emoji: "🔄"
 type: "tech"
 topics: ["ai", "go", "llm", "agent"]
@@ -10,7 +10,7 @@ published: false
 
 今回のコードは https://github.com/m-mizutani/leveret の [day19-plan-execute](https://github.com/m-mizutani/leveret/tree/day19-plan-execute-impl) ブランチに格納されていますので適宜参照してください。また今回は前日の設計に基づいた
 
-# Plan & Executeの実装
+# Plan & Executeの実装の大まかな流れ
 
 - `SendWithPlanExecute` がPlan & Executeの中核をなす実装
 - 既存の `Send` を壊さないよう、別立ての実装にしている
@@ -87,5 +87,9 @@ func (s *Session) Send(ctx context.Context, message string) (*genai.GenerateCont
 		return s.createResponseFromPlanExecute(result), nil
 	}
 ```
+
+# Plan & Execute の各処理
+
+
 
 # まとめ

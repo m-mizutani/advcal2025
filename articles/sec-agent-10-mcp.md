@@ -1,5 +1,5 @@
 ---
-title: "MCPによるツール利用の拡張"
+title: "Goで作るセキュリティ分析LLMエージェント(10): MCPによるツール利用の拡張"
 emoji: "🛡️"
 type: "tech"
 topics: ["ai", "go", "llm", "api"]

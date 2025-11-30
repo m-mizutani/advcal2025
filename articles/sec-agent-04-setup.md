@@ -1,5 +1,5 @@
 ---
-title: "開発環境の準備と事前実装済みコードの説明"
+title: "Goで作るセキュリティ分析LLMエージェント(4): 開発環境の準備と事前実装済みコードの説明"
 emoji: "⚙️"
 type: "tech"
 topics: ["go", "cli", "docker"]

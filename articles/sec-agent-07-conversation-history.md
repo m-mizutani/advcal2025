@@ -1,5 +1,5 @@
 ---
-title: "会話と履歴の管理"
+title: "Goで作るセキュリティ分析LLMエージェント(7): 会話と履歴の管理"
 emoji: "💬"
 type: "tech"
 topics: ["ai", "go", "llm"]

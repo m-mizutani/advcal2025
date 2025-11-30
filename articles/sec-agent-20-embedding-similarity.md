@@ -1,5 +1,5 @@
 ---
-title: "Embeddingによる類似アラート検索"
+title: "Goで作るセキュリティ分析LLMエージェント(20): Embeddingによる類似アラート検索"
 emoji: "🔍"
 type: "tech"
 topics: ["ai", "go", "llm", "rag"]

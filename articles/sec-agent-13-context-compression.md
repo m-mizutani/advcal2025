@@ -1,5 +1,5 @@
 ---
-title: "会話コンテキストの圧縮戦略"
+title: "Goで作るセキュリティ分析LLMエージェント(13): 会話コンテキストの圧縮戦略"
 emoji: "💬"
 type: "tech"
 topics: ["ai", "go", "llm", "agent"]

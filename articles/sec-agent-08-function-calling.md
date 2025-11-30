@@ -1,5 +1,5 @@
 ---
-title: "Function Callingによる外部ツール連携"
+title: "Goで作るセキュリティ分析LLMエージェント(8): Function Callingによる外部ツール連携"
 emoji: "🔧"
 type: "tech"
 topics: ["ai", "go", "llm", "agent"]

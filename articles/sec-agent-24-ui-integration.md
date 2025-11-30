@@ -1,5 +1,5 @@
 ---
-title: "WebUIとSlack連携の設計"
+title: "Goで作るセキュリティ分析LLMエージェント(24): WebUIとSlack連携の設計"
 emoji: "🖥️"
 type: "tech"
 topics: ["ai", "go", "agent", "api"]

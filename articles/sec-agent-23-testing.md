@@ -1,5 +1,5 @@
 ---
-title: "ツールの信頼性を高めるテスト戦略"
+title: "Goで作るセキュリティ分析LLMエージェント(23): ツールの信頼性を高めるテスト戦略"
 emoji: "🧪"
 type: "tech"
 topics: ["go", "test", "ai"]

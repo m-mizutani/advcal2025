@@ -1,5 +1,5 @@
 ---
-title: "システム総括とマルチエージェントの未来"
+title: "Goで作るセキュリティ分析LLMエージェント(25): システム総括とマルチエージェントの未来"
 emoji: "🌟"
 type: "tech"
 topics: ["ai", "llm", "agent"]
