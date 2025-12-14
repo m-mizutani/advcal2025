@@ -28,6 +28,8 @@ export default function ProgressChart({ articles }: ProgressChartProps) {
       displayDate: string;
       planned: number;
       actual: number | null;
+      actualOnTrack: number | null;
+      actualOverdue: number | null;
     }> = [];
 
     // 日付ごとのデータポイントを生成（週単位で表示）
@@ -42,6 +44,8 @@ export default function ProgressChart({ articles }: ProgressChartProps) {
     console.log('Today (JST):', todayStr);
     console.log('Articles with completed_date:', articles.filter(a => a.completed_date).map(a => ({ slug: a.slug, completed_date: a.completed_date })));
 
+    let previousState: 'onTrack' | 'overdue' | null = null;
+
     while (currentDate <= endDate) {
       const dateStr = currentDate.toISOString().split('T')[0];
 
@@ -51,12 +55,31 @@ export default function ProgressChart({ articles }: ProgressChartProps) {
 
       // 実績線：完了した記事数を引いて「残り記事数」を計算（文字列比較で行う）
       let actual: number | null = null;
+      let actualOnTrack: number | null = null;
+      let actualOverdue: number | null = null;
+
       if (dateStr <= todayStr) {
         const completedCount = articles.filter(a => {
           if (!a.completed_date) return false;
           return a.completed_date <= dateStr;
         }).length;
         actual = totalArticles - completedCount;
+
+        const currentState = actual > planned ? 'overdue' : 'onTrack';
+
+        // 状態が切り替わる場合、両方の値を設定して線を繋げる
+        if (previousState && previousState !== currentState) {
+          actualOnTrack = actual;
+          actualOverdue = actual;
+        } else if (currentState === 'overdue') {
+          actualOverdue = actual;
+          actualOnTrack = null;
+        } else {
+          actualOnTrack = actual;
+          actualOverdue = null;
+        }
+
+        previousState = currentState;
       }
 
       // 毎日データポイントを追加（グラフは間引いて表示）
@@ -65,6 +88,8 @@ export default function ProgressChart({ articles }: ProgressChartProps) {
         displayDate: `${currentDate.getMonth() + 1}/${currentDate.getDate()}`,
         planned,
         actual,
+        actualOnTrack,
+        actualOverdue,
       });
 
       // 1日進める
@@ -103,7 +128,9 @@ export default function ProgressChart({ articles }: ProgressChartProps) {
                     <p className="font-semibold">{payload[0].payload.date}</p>
                     <p className="text-sm text-gray-600">予定残り: {payload[0].payload.planned}本</p>
                     {payload[0].payload.actual !== null && (
-                      <p className="text-sm text-blue-600">実績残り: {payload[0].payload.actual}本</p>
+                      <p className={`text-sm ${payload[0].payload.actual > payload[0].payload.planned ? 'text-red-600' : 'text-blue-600'}`}>
+                        実績残り: {payload[0].payload.actual}本
+                      </p>
                     )}
                   </div>
                 );
@@ -115,19 +142,27 @@ export default function ProgressChart({ articles }: ProgressChartProps) {
           <Line
             type="stepAfter"
             dataKey="planned"
-            stroke="#9CA3AF"
+            stroke="#D1D5DB"
             strokeWidth={2}
-            strokeDasharray="5 5"
             dot={{ r: 3 }}
             name="予定（執筆締切ベース）"
           />
           <Line
             type="stepAfter"
-            dataKey="actual"
+            dataKey="actualOnTrack"
             stroke="#3B82F6"
             strokeWidth={3}
             dot={{ r: 4 }}
             name="実績（完了日ベース）"
+            connectNulls={false}
+          />
+          <Line
+            type="stepAfter"
+            dataKey="actualOverdue"
+            stroke="#DC2626"
+            strokeWidth={3}
+            dot={{ r: 4, fill: '#DC2626' }}
+            name="実績（遅延）"
             connectNulls={false}
           />
         </LineChart>
