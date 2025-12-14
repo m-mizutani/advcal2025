@@ -280,7 +280,7 @@ articles:
     title: ツールの信頼性を高めるテスト戦略
     scheduled_date: 2025-12-23
     scheduled_time: "09:00"
-    writing_deadline: 2025-12-15
+    writing_deadline: 2025-12-19
     publication_deadline: 2025-12-22
     status: not_started
     progress: 0
@@ -292,7 +292,7 @@ articles:
     title: WebUIとSlack連携の設計
     scheduled_date: 2025-12-24
     scheduled_time: "09:00"
-    writing_deadline: 2025-12-18
+    writing_deadline: 2025-12-21
     publication_deadline: 2025-12-23
     status: not_started
     progress: 0
