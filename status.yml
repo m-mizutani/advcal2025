@@ -241,7 +241,7 @@ articles:
 
   - day: 20
     slug: sec-agent-20-embedding-similarity
-    title: "Goで作るセキュリティ分析LLMエージェント(20): Embeddingによる類似アラート検索"
+    title: "Embeddingによる類似アラート検索"
     scheduled_date: 2025-12-20
     scheduled_time: "09:00"
     writing_deadline: 2025-12-06
@@ -253,7 +253,7 @@ articles:
 
   - day: 21
     slug: sec-agent-21-memory-overview
-    title: "Goで作るセキュリティ分析LLMエージェント(21): エージェントの記憶システム概論"
+    title: "エージェントの記憶システム概論"
     scheduled_date: 2025-12-21
     scheduled_time: "09:00"
     writing_deadline: 2025-12-09
@@ -265,7 +265,7 @@ articles:
 
   - day: 22
     slug: sec-agent-22-memory-implementation
-    title: "Goで作るセキュリティ分析LLMエージェント(22): エージェントの記憶システム実装"
+    title: "エージェントの記憶システム実装"
     scheduled_date: 2025-12-22
     scheduled_time: "09:00"
     writing_deadline: 2025-12-12
