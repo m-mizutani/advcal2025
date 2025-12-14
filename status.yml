@@ -252,20 +252,20 @@ articles:
     notes: "published: true となっており全セクション記述完了。Embeddingの基礎、RAGとの違い、類似アラート検索の実装、二段階フィルタリング手法を含む"
 
   - day: 21
-    slug: sec-agent-21-memory-system
-    title: エージェントの記憶システム
+    slug: sec-agent-21-memory-overview
+    title: "Goで作るセキュリティ分析LLMエージェント(21): エージェントの記憶システム概論"
     scheduled_date: 2025-12-21
     scheduled_time: "09:00"
     writing_deadline: 2025-12-09
     publication_deadline: 2025-12-20
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "構成変更: 新規トピック。短期/長期記憶、RAG。headingのみで本文未記述"
+    status: completed
+    progress: 100
+    completed_date: 2025-12-14
+    notes: "published: true となっており全セクション記述完了。記憶システムの4分類(短期/長期×静的/動的)、3つの取得アプローチ、セキュリティ分析への応用を解説。レビュー対応済み"
 
   - day: 22
-    slug: sec-agent-22-error-handling
-    title: エラーハンドリングとリカバリー戦略
+    slug: sec-agent-22-memory-implementation
+    title: "Goで作るセキュリティ分析LLMエージェント(22): エージェントの記憶システム実装"
     scheduled_date: 2025-12-22
     scheduled_time: "09:00"
     writing_deadline: 2025-12-12
@@ -273,7 +273,7 @@ articles:
     status: not_started
     progress: 0
     completed_date: null
-    notes: "構成変更: 新規トピック。リトライ、フォールバック、エスカレーション。headingのみで本文未記述"
+    notes: "21日目の理論編に続く実装編。記憶データモデル、Embeddingベース検索、スコアリング管理の実装。headingのみで本文未記述"
 
   - day: 23
     slug: sec-agent-23-testing
