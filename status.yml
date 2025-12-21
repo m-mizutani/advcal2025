@@ -277,15 +277,15 @@ articles:
 
   - day: 23
     slug: sec-agent-23-testing
-    title: ツールの信頼性を高めるテスト戦略
+    title: エージェントのテスト
     scheduled_date: 2025-12-23
     scheduled_time: "09:00"
     writing_deadline: 2025-12-19
     publication_deadline: 2025-12-22
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "headingのみで本文未記述"
+    status: completed
+    progress: 100
+    completed_date: 2025-12-21
+    notes: "published: true となっており全セクション記述完了。LLMエージェントのテスト課題3点と4つのアプローチ、テスト用ツール・LLM評価の実装例を含む。レビュー対応済み"
 
   - day: 24
     slug: sec-agent-24-ui-integration
