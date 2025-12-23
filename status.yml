@@ -301,12 +301,12 @@ articles:
 
   - day: 25
     slug: sec-agent-25-future
-    title: システム総括とマルチエージェントの未来
+    title: "Goで作るセキュリティ分析LLMエージェント(25): 深刻度判定の自動化実現にむけて"
     scheduled_date: 2025-12-25
     scheduled_time: "09:00"
     writing_deadline: 2025-12-24
     publication_deadline: 2025-12-24
-    status: not_started
-    progress: 0
-    completed_date: null
-    notes: "headingのみで本文未記述"
+    status: completed
+    progress: 100
+    completed_date: 2025-12-23
+    notes: "published: true となっており全セクション記述完了。深刻度判定の自動化構想、必要なコンテキスト4分類（組織・実装・業務・脅威）、解決アイディア（検索性向上・データアクセス・対話代行・マルチエージェント化）を解説"
